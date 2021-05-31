@@ -4,7 +4,7 @@ title: "Overview of BrainXcan software"
 
 # What is brainxcan testing?
 
-![](../figures/brainxcan_idea.png)
+![](../external_resources/figures/brainxcan_idea.png)
 
 BrainXcan explores the association between a complex phenotype and a collection of brain phenotypes quantified by MRI. Since these brain phenotypes are derived from image, we call them IDPs (image-derived phenotypes). In typical observation study, this is done by associating complex trait with observed brain IDPs. 
 
@@ -21,7 +21,7 @@ Please refer to [BrainXcan paper](to_be_filled) for more details.
 
 BrainXcan software is implemented as a light-weight data pipeline written with [snakemake](https://snakemake.readthedocs.io/en/stable/). In below is shown the workflow.
 
-![](../figures/dag.png)
+![](../external_resources/figures/dag.png)
 
 * `sbxcan_t1` and `sbxcan_dmri` run S-BrainXcan for all of the structural IDPs (T1 IDPs) and diffusion IDPs (dMRI IDPs) respectively.
 * `sbxcan_merge` aggregates the results from both structural and diffusion IDPs into one file.

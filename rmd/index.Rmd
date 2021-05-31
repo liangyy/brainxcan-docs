@@ -6,4 +6,4 @@ title: "Home"
 
 * [Overview of the software](overview.html)
 * Installation: Please refer to the section in [brainxcan repository README](https://github.com/liangyy/brainxcan#installation-notes)
-* [Get started with an example](example.html)
+* [Getting started with an example](example.html)
