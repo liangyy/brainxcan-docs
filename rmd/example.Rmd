@@ -351,7 +351,7 @@ These HTMLs can be generated along the BrainXcan visualization by setting `bxcan
 # Extra notes on using `snakemake`
 
 The BrainXcan software is essentially a data pipeline containing multiple steps and intermediate files. 
-It is implemented using `snakemake` @molder2021sustainable and the features provided by `snakemake` is directly applicable here. 
+It is implemented using `snakemake` @molder2021sustainable and the features provided by `snakemake` are directly applicable here. 
 
 For instance, the parameters in the configuration file can be replaced by `--config`, e.g. if we want to change the prefix of the output, we can do it without changing the config file:
 
