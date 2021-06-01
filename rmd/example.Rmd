@@ -45,6 +45,8 @@ brainxcan_data/
 
 There is no need to change the structure and it is designed to be used asis.
 
+See some detailed notes on the BrainXcan database at "[Looking into BrainXcan database](database.html)". 
+
 # Downloading GWAS
 
 In this example, we provide a pre-formatted GWAS file at here: [preview link](https://uchicago.box.com/s/s2yg1gvxm5vv1q3yijf5h389o3hkadwv) and [direct download link](https://uchicago.box.com/shared/static/s2yg1gvxm5vv1q3yijf5h389o3hkadwv.gz), which is adapted from a schizophrenia GWAS by @ripke2020mapping ([medRxiv link](https://www.medrxiv.org/content/10.1101/2020.09.12.20192922v1)).

@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "BrainXcan Docs"
 ---
 
 **Navigation**:
@@ -7,3 +7,4 @@ title: "Home"
 * [Overview of the software](overview.html)
 * Installation: Please refer to the section in [brainxcan repository README](https://github.com/liangyy/brainxcan#installation-notes)
 * [Getting started with an example](example.html)
+* [Looking into BrainXcan database](database.html)

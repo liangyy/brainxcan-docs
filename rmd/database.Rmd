@@ -1,0 +1,235 @@
+---
+title: "Looking into BrainXcan database"
+---
+
+```{r setup, include=FALSE}
+suppressMessages(library(dplyr))
+suppressMessages(library(pander))
+panderOptions('table.split.table', 120) 
+# knitr::opts_chunk$set(message = FALSE)
+# knitr::opts_chunk$set(echo = FALSE)
+datadir = '/Users/yanyul/Desktop/tmp/ukb_idp/brainxcan_data'
+```
+
+# About
+
+In this post, we will look into the BrainXcan database and learn about how to load the following data into R:
+
+* Prediction models 
+* Genotype covariance
+* IDP GWASs
+
+These data loading rely on python packages `pandas` and `scipy.sparse` which has been installed as part of brainxcan conda environment. 
+To use them in R, we can use `reticulate`.
+
+The naming convention of IDP is `IDP-[UKB_Field_ID]` and we call it IDP ID. The information of the IDPs can be found at [here](https://docs.google.com/spreadsheets/d/1xzLvwtIshyX10orGnGVyDNuyDHU-zgoYhGYemf-6I10).
+
+```{r, message=FALSE}
+
+# load reticulate since we want to use python package
+library(reticulate)
+# use brainxcan conda env
+use_condaenv('brainxcan')
+# load python packages
+pd = import('pandas')
+sp = import('scipy.sparse')
+
+```
+
+# Prediction models
+
+We share prediction models of original IDPs and residual IDPs trained from ridge and elastic net.
+The residual IDPs are obtained by regressing out the first principal component of IDP matrix (by subtype) from the original IDP.
+
+For each set of models, strutural IDPs and diffusion IDPs are saved separately and there are two types of files:
+
+* `*.parquet`
+* `*.perf.tsv.gz`
+
+The parquet file contains the prediction model weights where SNPs are in rows and IDPs are in columns
+The prediction performance (obtained from training pipeline) of the models is in the `tsv.gz` file.
+If setting the number of rows in `tsv.gz` file as n, then the number of columns in the parquet is n + 4 with the four additional columns indicating: rsID (`snpid`), non effect allele (`a0`), effect allele (`a1`), and chromosome (`chr`).
+
+The naming rule is:
+
+* `path-to-brainxcan_data/idp_weights/[model_type]/[idp_type].[modality].*`
+    - `model_type`: `ridge` or `elastic_net`
+    - `idp_type`: `residual` or `original`
+    - `modality`: `dmri` or `t1`
+
+Let's take a look at them.
+
+```{r}
+
+# set up the file path
+model_type = 'ridge'
+idp_type = 'residual'
+modality = 'dmri'
+parquet_file = paste0('idp_weights/', model_type, '/', idp_type, '.', modality, '.parquet')
+perf_file = paste0('idp_weights/', model_type, '/', idp_type, '.', modality, '.perf.tsv.gz')
+
+```
+
+```{r, results='asis', echo=FALSE}
+decorate = function(ss) {
+  paste0('`', ss, '`')
+}
+cat(
+  'model_type =', decorate(model_type), '\n\n',
+  'idp_type =', decorate(idp_type), '\n\n',
+  'modality =', decorate(modality), '\n\n',
+  'Reading parquet file:', decorate(paste0('path-to-brainxcan_data/', parquet_file)), '\n\n',
+  'Reading performance file:', decorate(paste0('path-to-brainxcan_data/', perf_file)), '\n\n'
+)
+
+```
+
+```{r}
+
+# load the parquet file
+df_weights = pd$read_parquet(paste0(datadir, '/', parquet_file))
+# load the performance file
+df_perf = read.table(paste0(datadir, '/', perf_file), stringsAsFactors = F, header = T) 
+
+# look at the first 6 columns and rows
+head(df_weights[, 1: 6]) %>% pander
+head(df_perf) %>% pander
+
+```
+
+```{r, results='asis', echo=FALSE}
+
+cat(
+  'Number of rows in weights table =', nrow(df_weights), '\n\n',
+  'Number of columns in weights table =', ncol(df_weights), '\n\n',
+  'Number of rows in performance table =', nrow(df_perf), '\n\n'
+)
+
+```
+
+The parquet file support reading by column. 
+So, if we only want to load the weights of a specific IDP, we can do the following:
+
+```{r}
+
+idp_id = 'IDP-25652'
+df_weights_sub = pd$read_parquet(
+  paste0(datadir, '/', parquet_file), 
+  columns = c('snpid', 'a0', 'a1', 'chr', idp_id)
+) 
+df_weights_sub %>% head %>% pander
+
+```
+
+# Genotype covariance
+
+Genotype covariance was computed using the UKB IDP cohort (the same as prediction model training).
+The genotype covariance is saved by chromosome. It is a banded matrix with the band width = 200 and only the upper triangular values are saved since it is symmetric.
+These genotype covariance files are at `brainxcan_data/geno_covar/` and for each chromosome, there are two files:
+
+* `chr*.banded.npz`: The banded genotype covariance in scipy sparse matrix format.
+* `chr*.banded.snp_meta.parquet`: The meta data annotating the rows/columns of the genotype covariance file in parquet format. The number of rows of the meta data matches the genotype covariance file and **the SNPs are in the same order**. 
+
+```{r, fig.height=5, fig.width=10}
+
+# load banded genotype covariance 
+mat = sp$load_npz(paste0(datadir, '/geno_covar/chr22.banded.npz'))
+
+# take the first 500 SNPs and visualize
+mat_sub = as.matrix(mat[ 1 : 500, 1 : 500])
+var_sub = diag(mat_sub)
+cor_sub = sweep(mat_sub, 1, FUN = '/', sqrt(var_sub))
+cor_sub = sweep(cor_sub, 2, FUN = '/', sqrt(var_sub))
+par(mfrow = c(1, 2))
+image(mat_sub, main = 'Covariance between SNPs')
+image(cor_sub, main = 'Correlation between SNPs')
+
+```
+
+```{r, results='asis', echo=FALSE}
+cat('class(mat) =', class(mat), '\n\n')
+```
+
+To annotate the genotype covariance with the actual SNP information, we should load the meta data.
+
+```{r}
+
+df_snp = pd$read_parquet(paste0(datadir, '/geno_covar/chr22.banded.snp_meta.parquet'))
+df_snp %>% head %>% pander
+
+```
+
+```{r, results='asis', echo=FALSE}
+
+cat(
+  'Number of rows in meta data =', nrow(df_snp), '\n\n',
+  'Number of rows/columns in genotype covariance =', paste0(dim(mat), collapse = ', '), '\n\n'
+)
+
+```
+
+# IDP GWAS
+
+We share the IDP GWAS results for all the IDPs being analyzed and the study cohort is the same as IDP model training (n = 24,490).
+
+The GWAS results are by chromosome and by IDP and the naming rule is as follow:
+
+* `path-to-brainxcan_data/idp_gwas/[idp_type].[modality].chr[chr_num]/[idp_id]].parquet`
+    - `idp_type`: `residual` or `original`
+    - `modality`: `dmri` or `t1`
+    - `chr_num`: 1 to 22
+    - `idp_id`: IDP ID
+
+The SNPs are in rows and columns are:
+
+* `variant_id`: rsID of the SNP
+* `phenotype_id`: IDP ID
+* `pval`: P-value of the association
+* `b` and `b_se`: Estimated effect size and standard error
+* `maf`: Minor allele frequency of the SNP in the GWAS cohort
+
+Further annotation of the SNPs can be found at `path-to-brainxcan_data/idp_gwas/snp_bim/chr[chr_num].bim`.
+This is essentially PLINK BIM file and the columns are: 1. Chromosome, 2. rsID, 3. placeholder, 4. Genomic position, 5. Effect allele, 6. Non-effect allele. 
+**The GWAS direction is the same as the one in BIM file.**
+
+For instance, let's load one GWAS file.
+
+
+```{r}
+
+# set up the file path
+idp_type = 'residual'
+modality = 't1'
+chr_num = 22
+idp_id = 'IDP-25002' 
+gwas_file = paste0('idp_gwas/', idp_type, '.', modality, '.chr', chr_num, '/', idp_id, '.parquet')
+bim_file = paste0('idp_gwas/', 'snp_bim/', 'chr', chr_num, '.bim')
+  
+```
+
+```{r, results='asis', echo=FALSE}
+cat(
+  'idp_type =', decorate(idp_type), '\n\n',
+  'modality =', decorate(modality), '\n\n',
+  'chr_num =', decorate(chr_num), '\n\n',
+  'idp_id =', decorate(idp_id), '\n\n',
+  'Reading parquet file:', decorate(paste0('path-to-brainxcan_data/', gwas_file)), '\n\n',
+  'Reading BIM file:', decorate(paste0('path-to-brainxcan_data/', bim_file)), '\n\n'
+)
+```
+
+```{r}
+
+df_gwas = pd$read_parquet(paste0(datadir, '/', gwas_file))
+df_bim = read.table(
+  paste0(datadir, '/', bim_file), 
+  col.names = c('chromosome', 'variant_id', 'ph', 'position', 'effect_allele', 'non_effect_allele'), 
+  stringsAsFactors = F
+) %>% select(-ph)  # remove placeholder column
+
+# annotate GWAS results with additional SNP information
+df_gwas = right_join(df_bim, df_gwas, by = 'variant_id')
+
+df_gwas %>% mutate(position = as.character(position)) %>% head %>% pander
+
+```
