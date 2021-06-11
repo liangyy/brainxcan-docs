@@ -15,11 +15,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 In this post, we run BrainXcan with an example. 
 
-First of all, please make sure you've cloned [Brainxcan code repository](https://github.com/liangyy/brainxcan) and installed all the BrainXcan software dependencies. 
+First of all, please make sure you've cloned [Brainxcan code repository](https://github.com/hakyimlab/brainxcan) and installed all the BrainXcan software dependencies. 
 
 To perform BrainXcan analysis, we need to prepare the following files:
 
-* The BrainXcan database and meta files (download from [brainxcan.hakyimlab.org](brainxcan.hakyimlab.org))
+* The BrainXcan database and meta files (download from [brainxcan database zenodo link](https://zenodo.org/record/4895174))
 * A file containing GWAS summary statistics. It should have the following information:
     - SNP rsID (we use rsID as SNP identifier) and chromosome of the SNP.
     - Effect and non-effect allele
@@ -31,7 +31,7 @@ To perform BrainXcan analysis, we need to prepare the following files:
 
 # Downloading BrainXcan database
 
-The BrainXcan database and meta files can be downloaded from [brainxcan.hakyimlab.org](brainxcan.hakyimlab.org).
+The BrainXcan database and meta files can be downloaded from [brainxcan database zenodo link](https://zenodo.org/record/4895174).
 The directory structure is 
 
 ```

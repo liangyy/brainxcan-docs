@@ -5,6 +5,6 @@ title: "BrainXcan Docs"
 **Navigation**:
 
 * [Overview of the software](overview.html)
-* Installation: Please refer to the section in [brainxcan repository README](https://github.com/liangyy/brainxcan#installation-notes)
+* Installation: Please refer to the section in [brainxcan repository README](https://github.com/hakyimlab/brainxcan#installation-notes)
 * [Getting started with an example](example.html)
 * [Looking into BrainXcan database](database.html)

@@ -380,8 +380,9 @@ div.tocify {
 <p>These data loading rely on python packages <code>pandas</code> and <code>scipy.sparse</code> which has been installed as part of brainxcan conda environment. To use them in R, we can use <code>reticulate</code>.</p>
 <p>The naming convention of IDP is <code>IDP-[UKB_Field_ID]</code> and we call it IDP ID. The information of the IDPs can be found at <a href="https://docs.google.com/spreadsheets/d/1xzLvwtIshyX10orGnGVyDNuyDHU-zgoYhGYemf-6I10">here</a>.</p>
 <pre class="r"><code># load reticulate since we want to use python package
-library(reticulate)
-# use brainxcan conda env
+library(reticulate)</code></pre>
+<pre><code>## Warning: package &#39;reticulate&#39; was built under R version 3.6.2</code></pre>
+<pre class="r"><code># use brainxcan conda env
 use_condaenv(&#39;brainxcan&#39;)
 # load python packages
 pd = import(&#39;pandas&#39;)
@@ -640,7 +641,7 @@ cor_sub = sweep(cor_sub, 2, FUN = &#39;/&#39;, sqrt(var_sub))
 par(mfrow = c(1, 2))
 image(mat_sub, main = &#39;Covariance between SNPs&#39;)
 image(cor_sub, main = &#39;Correlation between SNPs&#39;)</code></pre>
-<p><img src="database_files/figure-html/unnamed-chunk-27-1.png" width="960" /></p>
+<p><img src="database_files/figure-html/unnamed-chunk-7-1.png" width="960" /></p>
 <p>class(mat) = dgTMatrix</p>
 <p>To annotate the genotype covariance with the actual SNP information, we should load the meta data.</p>
 <pre class="r"><code>df_snp = pd$read_parquet(paste0(datadir, &#39;/geno_covar/chr22.banded.snp_meta.parquet&#39;))
