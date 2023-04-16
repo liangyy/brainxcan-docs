@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25687,0.3529073391488662,2.099552187494129e-14,7.644379564752891,1069786,1071343,0.012798823858440887,0.11313464820255495,0.10968273823170276,dMRI,2.857536864618199,0.004269430375021469,4.065868233201989,4.785396932528632e-05,w-OD,,forceps major,Weighted-mean OD (orientation dispersion index) in tract forceps major (from dMRI data)

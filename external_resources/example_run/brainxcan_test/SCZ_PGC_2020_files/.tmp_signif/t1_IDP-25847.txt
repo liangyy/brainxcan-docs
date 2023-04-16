@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25847,0.24600006820766976,2.9911284403671114e-08,5.541955198874018,1069786,1071343,0.016589376832585878,0.12880956811947278,0.12624283108118073,T1,2.0716319942908155,0.0382997738302021,2.9476374638467955,0.003202123496212879,Gray-Cortical,right,frontal orbital cortex,Volume of grey matter in Right Frontal Orbital Cortex

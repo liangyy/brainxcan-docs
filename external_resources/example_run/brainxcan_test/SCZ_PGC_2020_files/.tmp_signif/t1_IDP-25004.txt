@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25004,0.17001299200659947,4.059612464669593e-08,5.4882386961645855,1069786,1071343,0.034767118997788615,0.1866164286011759,0.1773369417707679,T1,2.0515522892695843,0.04021319298003895,2.9190669016298143,0.0035108086769592346,Total,,ventricular cerebrospinal fluid,Volume of ventricular cerebrospinal fluid (from T1 brain image)

@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+PC-FA-ProbTrack-1,-0.13325339151289606,8.52010513923533e-08,-5.3557525407890285,1069786,1071343,0.04660296627192706,0.21591878805058584,0.2084413309848582,dMRI,-2.0020277896250627,0.0452817428170742,-2.848600587664417,0.004391196982600393,w-FA,,PC,PC-FA-ProbTrack-1

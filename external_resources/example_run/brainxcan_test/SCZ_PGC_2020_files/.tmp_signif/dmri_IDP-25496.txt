@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25496,0.2142131912868516,9.456510077703772e-07,4.902623549155831,1069786,1071343,0.013727778864956686,0.11724274684196315,0.11609235785151455,dMRI,1.8326441546222412,0.06685550724080533,2.607591784135204,0.009118162160478505,w-FA,left,corticospinal tract,Weighted-mean FA (fractional anisotropy) in tract left corticospinal tract (from dMRI data)

@@ -20,6 +20,7 @@ First of all, please make sure you've cloned [Brainxcan code repository](https:/
 To perform BrainXcan analysis, we need to prepare the following files:
 
 * The BrainXcan database and meta files (download from [brainxcan database zenodo link](https://zenodo.org/record/4895174))
+    - To run S-BrainXcan with permutation within LD blocks, you will also need an LD block BED file, e.g. [link](https://bitbucket.org/nygcresearch/ldetect-data/src/master/EUR/fourier_ls-all.bed) and we have it copied [here](../external_resources/data/fourier_ls-all.bed) as well  
 * A file containing GWAS summary statistics. It should have the following information:
     - SNP rsID (we use rsID as SNP identifier) and chromosome of the SNP.
     - Effect and non-effect allele
@@ -78,7 +79,7 @@ rs4475691	chr1	C	T	0.012102946067745635	0.0121	0.9998151	65154	0.1429
 
 # Preparing the BrainXcan configuration file
 
-**TLDR**: The configuration file is in YAML format and the one for example run can be downloaded from [here](https://uchicago.box.com/s/yokw4ujx9ih5rycvmn9g7sopwpkkyl2u). And there are a few fields that you need to fill in.
+**TLDR**: The configuration file is in YAML format and the one for example run can be downloaded from [here](../external_resources/example_run/brainxcan_test.yaml). And there are a few fields that you need to fill in.
 
 If you are not in a hurry, we recommend going through the following sections which explain the configuration file in details.
 
@@ -114,6 +115,7 @@ Here we want to tell the software how to understand the GWAS file.
 * `effect_allele`: Column name of GWAS effect allele
 * `non_effect_allele`: Column name of GWAS non-effect allele
 * `chr`: Column name of chromosome
+* `position`: Column name of position
 
 Along with **Group 1 or 2** (see details at [here](#about)):
 
@@ -137,6 +139,7 @@ non_effect_allele: 'non_effect_allele'
 chr: 'chromosome'
 effect_size: 'effect_size'
 effect_size_se: 'standard_error'
+position: 'position'
 ```
 
 ## Specifying parameters in BrainXcan
@@ -147,6 +150,17 @@ There are several parameters underlying a BrainXcan run. They are associated wit
     - `model_type`: IDP prediction model type: `ridge` or `elastic_net` (**Default** = `ridge`)
     - `idp_type`: IDP sets to use: `original` or `residual` (after PC adjustment) (**Default** = `residual`)
     - `spearman_cutoff`: CV Spearman cutoff on models (only models passing this criteria will be shown) (**Default** = `0.1`)
+* BrainXcan adjustment options
+    - (**Recommended**) Adjusting z-scores with LD block-based permutation
+        + `bxcan_ldblock_perm`: If want to run this adjustment, set the path to the BED file (TAB-delimited base0 with header chr, start, stop)
+        + `bxcan_ldblock_perm_seed`: Random seed
+        + `bxcan_ldblock_perm_nrepeat`: Number of permutation across all IDPs
+        + `correction_factor_perm`: Correcting the standard error of the simulated z-scores by multiplying with this factor (default = 1.1)
+    - (**Not recommended**) Adjusting z-scores via simulated weights
+        + `bxcan_empirical_z`: Whether to run this adjustment or not
+        + `bxcan_empirical_z_seed`: Random seed
+        + `bxcan_empirical_z_nrepeat`: Number of simulated IDPs
+        + `correction_factor_emp`: Correcting the standard error of the simulated z-scores by multiplying with this factor
 * Mendelian randomization (MR): extrating a list of significant IDP and run MR
     - `signif_pval`: P-value cutoff to call an IDP significant (**Default** = `1e-5`)
     - `signif_max_idps`: Maximun number of IDPs to run MR (discard by p-value if too many IDPs passing p-value filter) (**Default** = `10`)
@@ -164,14 +178,17 @@ model_type: 'ridge'
 idp_type: 'residual'
 spearman_cutoff: 0.1 
 
-signif_pval: 1e-5
-signif_max_idps: 2  # we set it to a small number since running MR takes time
+signif_pval: 0.01
+signif_max_idps: 20
+gwas_pop: 'EUR'
 ld_clump_yaml: '{datadir}/mr/ld_clump.yaml'
 
 rscript_exe: 'Rscript' 
 python_exe: 'python'
 plink_exe: 'plink'
 ```
+
+The full list of parameters available in a BrainXcan configuration YAML is explained (with default values) at [here](https://github.com/hakyimlab/brainxcan/blob/main/config.example.yaml) 
 
 # Running BrainXcan
 
@@ -235,7 +252,7 @@ It takes about 9 minutes with 4 Gb memory. The output files are put in folder `b
 
 # Looking at the output of BrainXcan
 
-The output files of the above run can be downloaded from [here](https://uchicago.box.com/s/1zyx8o6folfy77va7l76o89izelcatnr). 
+The output files of the above run can be downloaded from [here](../external_resources/example_run/brainxcan_test.zip). 
 Here is an overview of the files.
 
 ```
@@ -251,7 +268,8 @@ brainxcan_test
     │   ├── dmri_IDP-25687.MR_vis.pdf
     │   ├── t1_IDP-25020.MR.rds
     │   ├── t1_IDP-25020.MR_sumstats.tsv
-    │   └── t1_IDP-25020.MR_vis.pdf
+    │   ├── t1_IDP-25020.MR_vis.pdf
+    |   └── [more MR results]
     └── logs
         ├── dmri_IDP-25687.mr.log
         ├── dmri_IDP-25687.mr_vis.log
@@ -262,9 +280,8 @@ brainxcan_test
         ├── sbxcan_signif.log
         ├── sbxcan_vis.log
         ├── t1_IDP-25020.mr.log
-        └── t1_IDP-25020.mr_vis.log
-
-3 directories, 20 files
+        ├── t1_IDP-25020.mr_vis.log
+        └── [more MR log files]
 ```
 
 * `[prefix].sbrainxcan.csv`: BrainXcan association results in CSV format.
@@ -283,6 +300,8 @@ Let's take a quick look at `brainxcan_test/SCZ_PGC_2020.sbrainxcan.csv` (first t
 The descriptions of each columns are at the bottom of the table.
 
 ```{r, results='asis'}
+library(dplyr)
+library(pander)
 dd = read.csv('~/Downloads/brainxcan_test/SCZ_PGC_2020.sbrainxcan.csv', stringsAsFactors = F)
 dd$nsnp_used = as.character(dd$nsnp_used)
 dd$nsnp_total = as.character(dd$nsnp_total)
@@ -291,13 +310,18 @@ rbind(
   data.frame(
     IDP = 'IDP ID code (UKB field ID)', 
     bhat = 'Estimated effect size of the association test', 
-    pval = 'P-value of the association test',
+    pval = 'P-value of the association test (without adjustment)',
+    z_brainxcan = 'Z-score of the association test (without adjustment)',
     nsnp_used = 'Number of SNPs used in the calculation',
     nsnp_total = 'Total number of SNPs in the prediction model',
     CV_R2 = 'R2 of the prediction model (cross-validated)',
     CV_Pearson = 'Pearson correlation of the prediction model (cross-validated)',
     CV_Spearman = 'Spearman correlation of the prediction model (cross-validated)',
     modality = 'T1 (structural) or dMRI (diffusion)',
+    z_adj_gc = 'Z-score adjusted by GC',
+    pval_adj_gc = 'P-value adjust by GC',
+    z_adj_perm_null = 'Z-score adjusted by permutation',
+    pval_adj_perm_null = 'P-value adjusted by permutation',
     subtype = 'IDP subtype',
     left_or_right = 'Left/right side of the brain',
     region = 'Anatomical region',
@@ -335,11 +359,11 @@ rbind(
 
 ## Visualization and report 
 
-* [Visualization of structural IDPs](../external_resources/figures/SCZ_PGC_2020.vis.T1.pdf)
-* [Visualization of diffusion IDPs](../external_resources/figures/SCZ_PGC_2020.vis.dMRI.pdf)
-* [Automated report](../external_resources/pages/SCZ_PGC_2020.report.html)
+* [Visualization of structural IDPs](../external_resources/example_run/brainxcan_test/SCZ_PGC_2020.vis.T1.pdf)
+* [Visualization of diffusion IDPs](../external_resources/example_run/brainxcan_test/SCZ_PGC_2020.vis.dMRI.pdf)
+* [Automated report](../external_resources/example_run/brainxcan_test/SCZ_PGC_2020.report.html)
 
-We provide interactive HTMLs showning regions in the visualization:
+We provide interactive HTMLs showing regions in the visualization:
 
 * [Cortical  gray matters](../external_resources/pages/label_Cortical.html)
 * [Subcortical gray matters](../external_resources/pages/label_Subcortical-GMvol.html)

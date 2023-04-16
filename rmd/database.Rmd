@@ -22,10 +22,9 @@ In this post, we will look into the BrainXcan database and learn about how to lo
 These data loading rely on python packages `pandas` and `scipy.sparse` which has been installed as part of brainxcan conda environment. 
 To use them in R, we can use `reticulate`.
 
-The naming convention of IDP is `IDP-[UKB_Field_ID]` and we call it IDP ID. The information of the IDPs can be found at [here](https://docs.google.com/spreadsheets/d/1xzLvwtIshyX10orGnGVyDNuyDHU-zgoYhGYemf-6I10).
+The naming convention of IDP is `IDP-[UKB_Field_ID]` and we call it IDP ID. The information of the IDPs can be found at [here](../external_resources/data/Table_S2.csv).
 
 ```{r, message=FALSE}
-
 # load reticulate since we want to use python package
 library(reticulate)
 # use brainxcan conda env
@@ -60,7 +59,6 @@ The naming rule is:
 Let's take a look at them.
 
 ```{r}
-
 # set up the file path
 model_type = 'ridge'
 idp_type = 'residual'

@@ -1,0 +1,78 @@
+2023-04-11 05:04:21 PM  Loading GWAS.
+2023-04-11 05:04:29 PM  GWAS SNP = 1071718
+2023-04-11 05:04:29 PM  Loading IDP weights.
+2023-04-11 05:04:41 PM  IDP SNP = 1071343 and number of IDPs = 109
+2023-04-11 05:04:41 PM  
+            Generating permuted weights by LD block:
+            nrepeat = 10 and seed = 1
+2023-04-11 05:04:41 PM  Harmonizing GWAS and IDP weights.
+2023-04-11 05:04:49 PM  1069786 SNPs left after harmonizing GWAS and IDP weights.
+2023-04-11 05:04:50 PM  Chromosome 1: Loading genotype covariance meta information.
+2023-04-11 05:04:51 PM  Step0 Chromosome 1: 88123 out of 88123 SNPs in IDP/GWAS are used.
+2023-04-11 05:04:51 PM  Step1 Chromosome 1: Working with genotype covariance.
+2023-04-11 05:05:35 PM  Chromosome 2: Loading genotype covariance meta information.
+2023-04-11 05:05:36 PM  Step0 Chromosome 2: 89274 out of 89274 SNPs in IDP/GWAS are used.
+2023-04-11 05:05:36 PM  Step1 Chromosome 2: Working with genotype covariance.
+2023-04-11 05:06:20 PM  Chromosome 3: Loading genotype covariance meta information.
+2023-04-11 05:06:21 PM  Step0 Chromosome 3: 74241 out of 74241 SNPs in IDP/GWAS are used.
+2023-04-11 05:06:21 PM  Step1 Chromosome 3: Working with genotype covariance.
+2023-04-11 05:06:58 PM  Chromosome 4: Loading genotype covariance meta information.
+2023-04-11 05:06:59 PM  Step0 Chromosome 4: 66352 out of 66352 SNPs in IDP/GWAS are used.
+2023-04-11 05:06:59 PM  Step1 Chromosome 4: Working with genotype covariance.
+2023-04-11 05:07:32 PM  Chromosome 5: Loading genotype covariance meta information.
+2023-04-11 05:07:33 PM  Step0 Chromosome 5: 68487 out of 68487 SNPs in IDP/GWAS are used.
+2023-04-11 05:07:33 PM  Step1 Chromosome 5: Working with genotype covariance.
+2023-04-11 05:08:07 PM  Chromosome 6: Loading genotype covariance meta information.
+2023-04-11 05:08:08 PM  Step0 Chromosome 6: 71767 out of 71767 SNPs in IDP/GWAS are used.
+2023-04-11 05:08:08 PM  Step1 Chromosome 6: Working with genotype covariance.
+2023-04-11 05:08:44 PM  Chromosome 7: Loading genotype covariance meta information.
+2023-04-11 05:08:45 PM  Step0 Chromosome 7: 58793 out of 58793 SNPs in IDP/GWAS are used.
+2023-04-11 05:08:45 PM  Step1 Chromosome 7: Working with genotype covariance.
+2023-04-11 05:09:14 PM  Chromosome 8: Loading genotype covariance meta information.
+2023-04-11 05:09:15 PM  Step0 Chromosome 8: 58037 out of 58037 SNPs in IDP/GWAS are used.
+2023-04-11 05:09:15 PM  Step1 Chromosome 8: Working with genotype covariance.
+2023-04-11 05:09:44 PM  Chromosome 9: Loading genotype covariance meta information.
+2023-04-11 05:09:45 PM  Step0 Chromosome 9: 48875 out of 48875 SNPs in IDP/GWAS are used.
+2023-04-11 05:09:45 PM  Step1 Chromosome 9: Working with genotype covariance.
+2023-04-11 05:10:09 PM  Chromosome 10: Loading genotype covariance meta information.
+2023-04-11 05:10:10 PM  Step0 Chromosome 10: 57242 out of 57242 SNPs in IDP/GWAS are used.
+2023-04-11 05:10:10 PM  Step1 Chromosome 10: Working with genotype covariance.
+2023-04-11 05:10:39 PM  Chromosome 11: Loading genotype covariance meta information.
+2023-04-11 05:10:39 PM  Step0 Chromosome 11: 54589 out of 54589 SNPs in IDP/GWAS are used.
+2023-04-11 05:10:39 PM  Step1 Chromosome 11: Working with genotype covariance.
+2023-04-11 05:11:07 PM  Chromosome 12: Loading genotype covariance meta information.
+2023-04-11 05:11:07 PM  Step0 Chromosome 12: 52977 out of 52977 SNPs in IDP/GWAS are used.
+2023-04-11 05:11:07 PM  Step1 Chromosome 12: Working with genotype covariance.
+2023-04-11 05:11:34 PM  Chromosome 13: Loading genotype covariance meta information.
+2023-04-11 05:11:34 PM  Step0 Chromosome 13: 40267 out of 40267 SNPs in IDP/GWAS are used.
+2023-04-11 05:11:34 PM  Step1 Chromosome 13: Working with genotype covariance.
+2023-04-11 05:11:55 PM  Chromosome 14: Loading genotype covariance meta information.
+2023-04-11 05:11:55 PM  Step0 Chromosome 14: 35354 out of 35354 SNPs in IDP/GWAS are used.
+2023-04-11 05:11:55 PM  Step1 Chromosome 14: Working with genotype covariance.
+2023-04-11 05:12:13 PM  Chromosome 15: Loading genotype covariance meta information.
+2023-04-11 05:12:13 PM  Step0 Chromosome 15: 32246 out of 32246 SNPs in IDP/GWAS are used.
+2023-04-11 05:12:13 PM  Step1 Chromosome 15: Working with genotype covariance.
+2023-04-11 05:12:29 PM  Chromosome 16: Loading genotype covariance meta information.
+2023-04-11 05:12:29 PM  Step0 Chromosome 16: 32937 out of 32937 SNPs in IDP/GWAS are used.
+2023-04-11 05:12:29 PM  Step1 Chromosome 16: Working with genotype covariance.
+2023-04-11 05:12:46 PM  Chromosome 17: Loading genotype covariance meta information.
+2023-04-11 05:12:46 PM  Step0 Chromosome 17: 29294 out of 29294 SNPs in IDP/GWAS are used.
+2023-04-11 05:12:46 PM  Step1 Chromosome 17: Working with genotype covariance.
+2023-04-11 05:13:01 PM  Chromosome 18: Loading genotype covariance meta information.
+2023-04-11 05:13:01 PM  Step0 Chromosome 18: 31765 out of 31765 SNPs in IDP/GWAS are used.
+2023-04-11 05:13:01 PM  Step1 Chromosome 18: Working with genotype covariance.
+2023-04-11 05:13:17 PM  Chromosome 19: Loading genotype covariance meta information.
+2023-04-11 05:13:17 PM  Step0 Chromosome 19: 20119 out of 20119 SNPs in IDP/GWAS are used.
+2023-04-11 05:13:17 PM  Step1 Chromosome 19: Working with genotype covariance.
+2023-04-11 05:13:27 PM  Chromosome 20: Loading genotype covariance meta information.
+2023-04-11 05:13:28 PM  Step0 Chromosome 20: 28082 out of 28082 SNPs in IDP/GWAS are used.
+2023-04-11 05:13:28 PM  Step1 Chromosome 20: Working with genotype covariance.
+2023-04-11 05:13:42 PM  Chromosome 21: Loading genotype covariance meta information.
+2023-04-11 05:13:42 PM  Step0 Chromosome 21: 15263 out of 15263 SNPs in IDP/GWAS are used.
+2023-04-11 05:13:42 PM  Step1 Chromosome 21: Working with genotype covariance.
+2023-04-11 05:13:50 PM  Chromosome 22: Loading genotype covariance meta information.
+2023-04-11 05:13:50 PM  Step0 Chromosome 22: 15702 out of 15702 SNPs in IDP/GWAS are used.
+2023-04-11 05:13:50 PM  Step1 Chromosome 22: Working with genotype covariance.
+2023-04-11 05:13:57 PM  Step2: Computing marginal test.
+2023-04-11 05:13:57 PM  Saving outputs.
+2023-04-11 05:13:58 PM  Done.

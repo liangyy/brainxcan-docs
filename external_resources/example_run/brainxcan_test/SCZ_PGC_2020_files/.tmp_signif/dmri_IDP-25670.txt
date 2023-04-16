@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25670,-0.18318789379348088,5.830444165914147e-08,-5.423924729611403,1069786,1071343,0.0269924553859654,0.16430959437691162,0.16519640179089531,dMRI,-2.0275111582950154,0.04261016447707197,-2.8848597941275265,0.003915880145625821,w-ICVF,right,posterior thalamic radiation,Weighted-mean ICVF (intra-cellular volume fraction) in tract right posterior thalamic radiation (from dMRI data)

@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25682,0.2447061515594985,2.3018274869542843e-07,5.17314783388447,1069786,1071343,0.013303340255027107,0.1153747506957612,0.11200827093484382,dMRI,1.9337685310138717,0.05314159356321521,2.7514773782858937,0.005932711724539175,w-OD,right,cingulate gyrus part of cingulum,Weighted-mean OD (orientation dispersion index) in tract right cingulate gyrus part of cingulum (from dMRI data)

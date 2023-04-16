@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25359,0.18279962608979566,6.696457167528467e-09,5.798365016565072,1069786,1071343,0.028122812432698763,0.16769903690625468,0.16108669629923308,dMRI,2.167480257749709,0.030198253444445232,3.0840159002653778,0.0020422668021025875,ICVF,left,cerebral peduncle,Mean ICVF (intra-cellular volume fraction) in cerebral peduncle (left) on FA (fractional anisotropy) skeleton (from dMRI data)

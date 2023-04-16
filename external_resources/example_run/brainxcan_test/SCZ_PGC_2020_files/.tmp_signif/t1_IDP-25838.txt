@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25838,0.2404489960067072,1.515462923029543e-07,5.25067082011263,1069786,1071343,0.011207692388204404,0.1061095698594011,0.10240824485064254,T1,1.9627473106683608,0.04967554283684893,2.7927100570635623,0.005226851886865578,Gray-Cortical,left,"cingulate gyrus, anterior division","Volume of grey matter in Left Cingulate Gyrus, anterior division"

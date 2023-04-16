@@ -1,0 +1,126 @@
+
+
+processing file: report_template.Rmd
+  |                                                                              |                                                                      |   0%  |                                                                              |..                                                                    |   3%
+   inline R code fragments
+
+  |                                                                              |....                                                                  |   6%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                              |......                                                                |   9%
+  ordinary text without R code
+
+  |                                                                              |........                                                              |  12%
+label: parameters
+  |                                                                              |..........                                                            |  15%
+  ordinary text without R code
+
+  |                                                                              |............                                                          |  18%
+label: load_meta
+  |                                                                              |..............                                                        |  21%
+  ordinary text without R code
+
+  |                                                                              |................                                                      |  24%
+label: load_results
+  |                                                                              |...................                                                   |  26%
+  ordinary text without R code
+
+  |                                                                              |.....................                                                 |  29%
+label: subset_to_idp_main_results
+  |                                                                              |.......................                                               |  32%
+   inline R code fragments
+
+  |                                                                              |.........................                                             |  35%
+label: bonforroni_cutoffs
+  |                                                                              |...........................                                           |  38%
+  ordinary text without R code
+
+  |                                                                              |.............................                                         |  41%
+label: qvalue
+  |                                                                              |...............................                                       |  44%
+   inline R code fragments
+
+  |                                                                              |.................................                                     |  47%
+label: show_count
+  |                                                                              |...................................                                   |  50%
+   inline R code fragments
+
+adjusted p-values based on permuted weights
+  |                                                                              |.....................................                                 |  53%
+label: vis_t1 (with options) 
+List of 2
+ $ fig.height: num 7
+ $ fig.width : num 8
+
+  |                                                                              |.......................................                               |  56%
+  ordinary text without R code
+
+  |                                                                              |.........................................                             |  59%
+label: vis_dmri (with options) 
+List of 2
+ $ fig.height: num 6
+ $ fig.width : num 8
+
+  |                                                                              |...........................................                           |  62%
+  ordinary text without R code
+
+  |                                                                              |.............................................                         |  65%
+label: vis_t12 (with options) 
+List of 2
+ $ fig.height: num 14
+ $ fig.width : num 6
+
+  |                                                                              |...............................................                       |  68%
+  ordinary text without R code
+
+  |                                                                              |.................................................                     |  71%
+label: vis_dmri2 (with options) 
+List of 2
+ $ fig.height: num 12
+ $ fig.width : num 6
+
+  |                                                                              |...................................................                   |  74%
+  ordinary text without R code
+
+  |                                                                              |......................................................                |  76%
+label: load_mr
+  |                                                                              |........................................................              |  79%
+   inline R code fragments
+
+  |                                                                              |..........................................................            |  82%
+label: dmri_top_n (with options) 
+List of 1
+ $ results: chr "asis"
+
+  |                                                                              |............................................................          |  85%
+   inline R code fragments
+
+  |                                                                              |..............................................................        |  88%
+label: t1_top_n (with options) 
+List of 1
+ $ results: chr "asis"
+
+  |                                                                              |................................................................      |  91%
+  ordinary text without R code
+
+  |                                                                              |..................................................................    |  94%
+label: bxcan_figures (with options) 
+List of 1
+ $ results: chr "asis"
+
+  |                                                                              |....................................................................  |  97%
+  ordinary text without R code
+
+  |                                                                              |......................................................................| 100%
+label: mr_figures (with options) 
+List of 1
+ $ results: chr "asis"
+
+
+output file: report_template.knit.md
+
+/gpfs/data/im-lab/nas40t2/yanyul/softwares/miniconda2/envs/r_36/bin/pandoc +RTS -K512m -RTS report_template.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /gpfs/data/im-lab/nas40t2/festus/metabolomics/guardian/MetaboXcan/brainxcan/psychiatric_permz_rerun/SCZ_PGC_2020.report.html --lua-filter /gpfs/data/im-lab/nas40t2/festus/my_envs/r_36_copy/lib/R/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /gpfs/data/im-lab/nas40t2/festus/my_envs/r_36_copy/lib/R/library/rmarkdown/rmarkdown/lua/latex-div.lua --self-contained --variable bs3=TRUE --standalone --section-divs --table-of-contents --toc-depth 3 --variable toc_float=1 --variable toc_selectors=h1,h2,h3 --variable toc_collapsed=1 --variable toc_smooth_scroll=1 --variable toc_print=1 --template /gpfs/data/im-lab/nas40t2/festus/my_envs/r_36_copy/lib/R/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable theme=cosmo --include-in-header /scratch/fnyasimi1/tmp_dir/RtmpvhrLxU/rmarkdown-str261d265fcd8f6.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' 
+
+Output created: /gpfs/data/im-lab/nas40t2/festus/metabolomics/guardian/MetaboXcan/brainxcan/psychiatric_permz_rerun/SCZ_PGC_2020.report.html

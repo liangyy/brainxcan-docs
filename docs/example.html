@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -14,6 +13,7 @@
 
 <title>An example BrainXcan run</title>
 
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -28,6 +28,15 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -74,6 +83,29 @@ h6 {
 }
 </style>
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 
 
 
@@ -89,7 +121,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -238,6 +269,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -266,6 +298,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -351,7 +389,7 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/liangyy/brainxcan-docs">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -369,13 +407,17 @@ div.tocify {
 </div>
 
 
-<div id="about" class="section level1">
-<h1><span class="header-section-number">1</span> About</h1>
+<div id="about" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> About</h1>
 <p>In this post, we run BrainXcan with an example.</p>
 <p>First of all, please make sure you’ve cloned <a href="https://github.com/hakyimlab/brainxcan">Brainxcan code repository</a> and installed all the BrainXcan software dependencies.</p>
 <p>To perform BrainXcan analysis, we need to prepare the following files:</p>
 <ul>
-<li>The BrainXcan database and meta files (download from <a href="https://zenodo.org/record/4895174">brainxcan database zenodo link</a>)</li>
+<li>The BrainXcan database and meta files (download from <a href="https://zenodo.org/record/4895174">brainxcan database zenodo link</a>)
+<ul>
+<li>To run S-BrainXcan with permutation within LD blocks, you will also need an LD block BED file, e.g. <a href="https://bitbucket.org/nygcresearch/ldetect-data/src/master/EUR/fourier_ls-all.bed">link</a> and we have it copied <a href="../external_resources/data/fourier_ls-all.bed">here</a> as well<br />
+</li>
+</ul></li>
 <li>A file containing GWAS summary statistics. It should have the following information:
 <ul>
 <li>SNP rsID (we use rsID as SNP identifier) and chromosome of the SNP.</li>
@@ -389,8 +431,8 @@ div.tocify {
 <li>A pipeline configuration file.</li>
 </ul>
 </div>
-<div id="downloading-brainxcan-database" class="section level1">
-<h1><span class="header-section-number">2</span> Downloading BrainXcan database</h1>
+<div id="downloading-brainxcan-database" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Downloading BrainXcan database</h1>
 <p>The BrainXcan database and meta files can be downloaded from <a href="https://zenodo.org/record/4895174">brainxcan database zenodo link</a>. The directory structure is</p>
 <pre><code>brainxcan_data/
 |-- bxcan_vis
@@ -399,10 +441,10 @@ div.tocify {
 |-- idp_weights
 `-- mr</code></pre>
 <p>There is no need to change the structure and it is designed to be used asis.</p>
-<p>See some detailed notes on the BrainXcan database at “<a href="database.html">Looking into BrainXcan database</a>”.</p>
+<p>See some detailed notes on the BrainXcan database at “<a href="database.html">Looking into BrainXcan database</a>.”</p>
 </div>
-<div id="downloading-gwas" class="section level1">
-<h1><span class="header-section-number">3</span> Downloading GWAS</h1>
+<div id="downloading-gwas" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Downloading GWAS</h1>
 <p>In this example, we provide a pre-formatted GWAS file at here: <a href="https://uchicago.box.com/s/s2yg1gvxm5vv1q3yijf5h389o3hkadwv">preview link</a> and <a href="https://uchicago.box.com/shared/static/s2yg1gvxm5vv1q3yijf5h389o3hkadwv.gz">direct download link</a>, which is adapted from a schizophrenia GWAS by <span class="citation">Ripke et al. (2020)</span> (<a href="https://www.medrxiv.org/content/10.1101/2020.09.12.20192922v1">medRxiv link</a>).</p>
 <p>First, let’s download and take a look at it.</p>
 <pre><code># download
@@ -424,9 +466,9 @@ rs4040617   chr1    A   G   -0.0010993954433010642  0.0127  -0.09036144 71843   
 rs4970383   chr1    C   A   0.02810116511090993 0.0111  2.5433347   64548   0.1964
 rs4475691   chr1    C   T   0.012102946067745635    0.0121  0.9998151   65154   0.1429</code></pre>
 </div>
-<div id="preparing-the-brainxcan-configuration-file" class="section level1">
-<h1><span class="header-section-number">4</span> Preparing the BrainXcan configuration file</h1>
-<p><strong>TLDR</strong>: The configuration file is in YAML format and the one for example run can be downloaded from <a href="https://uchicago.box.com/s/yokw4ujx9ih5rycvmn9g7sopwpkkyl2u">here</a>. And there are a few fields that you need to fill in.</p>
+<div id="preparing-the-brainxcan-configuration-file" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Preparing the BrainXcan configuration file</h1>
+<p><strong>TLDR</strong>: The configuration file is in YAML format and the one for example run can be downloaded from <a href="../external_resources/example_run/brainxcan_test.yaml">here</a>. And there are a few fields that you need to fill in.</p>
 <p>If you are not in a hurry, we recommend going through the following sections which explain the configuration file in details.</p>
 <p>The configuration file contains three main parts:</p>
 <ul>
@@ -435,8 +477,8 @@ rs4475691   chr1    C   T   0.012102946067745635    0.0121  0.9998151   65154   
 <li>Some parameter settings in BrainXcan.</li>
 </ul>
 <p>We will go over them one by one.</p>
-<div id="specifying-inputoutput-paths" class="section level2">
-<h2><span class="header-section-number">4.1</span> Specifying input/output paths</h2>
+<div id="specifying-inputoutput-paths" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Specifying input/output paths</h2>
 <ul>
 <li><code>datadir</code>: Path to the BrainXcan database folder.</li>
 <li><code>outdir</code>: Output directory name (if it does not exist, it will be generated).</li>
@@ -449,8 +491,8 @@ outdir: &#39;brainxcan_test&#39;
 prefix: &#39;SCZ_PGC_2020&#39;
 brainxcan_path: &#39;path-to-brainxcan-repository/brainxcan&#39;</code></pre>
 </div>
-<div id="specifying-gwas-meta-information" class="section level2">
-<h2><span class="header-section-number">4.2</span> Specifying GWAS meta information</h2>
+<div id="specifying-gwas-meta-information" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Specifying GWAS meta information</h2>
 <p>Here we want to tell the software how to understand the GWAS file.</p>
 <ul>
 <li><code>gwas</code>: Path to GWAS file (formats: <code>csv(.gz)</code>, <code>tsv(.gz)</code>, <code>parquet</code>).</li>
@@ -458,6 +500,7 @@ brainxcan_path: &#39;path-to-brainxcan-repository/brainxcan&#39;</code></pre>
 <li><code>effect_allele</code>: Column name of GWAS effect allele</li>
 <li><code>non_effect_allele</code>: Column name of GWAS non-effect allele</li>
 <li><code>chr</code>: Column name of chromosome</li>
+<li><code>position</code>: Column name of position</li>
 </ul>
 <p>Along with <strong>Group 1 or 2</strong> (see details at <a href="#about">here</a>):</p>
 <ul>
@@ -481,10 +524,11 @@ effect_allele: &#39;effect_allele&#39;
 non_effect_allele: &#39;non_effect_allele&#39;
 chr: &#39;chromosome&#39;
 effect_size: &#39;effect_size&#39;
-effect_size_se: &#39;standard_error&#39;</code></pre>
+effect_size_se: &#39;standard_error&#39;
+position: &#39;position&#39;</code></pre>
 </div>
-<div id="specifying-parameters-in-brainxcan" class="section level2">
-<h2><span class="header-section-number">4.3</span> Specifying parameters in BrainXcan</h2>
+<div id="specifying-parameters-in-brainxcan" class="section level2" number="4.3">
+<h2 number="4.3"><span class="header-section-number">4.3</span> Specifying parameters in BrainXcan</h2>
 <p>There are several parameters underlying a BrainXcan run. They are associated with three aspects:</p>
 <ul>
 <li>BrainXcan association test
@@ -492,6 +536,23 @@ effect_size_se: &#39;standard_error&#39;</code></pre>
 <li><code>model_type</code>: IDP prediction model type: <code>ridge</code> or <code>elastic_net</code> (<strong>Default</strong> = <code>ridge</code>)</li>
 <li><code>idp_type</code>: IDP sets to use: <code>original</code> or <code>residual</code> (after PC adjustment) (<strong>Default</strong> = <code>residual</code>)</li>
 <li><code>spearman_cutoff</code>: CV Spearman cutoff on models (only models passing this criteria will be shown) (<strong>Default</strong> = <code>0.1</code>)</li>
+</ul></li>
+<li>BrainXcan adjustment options
+<ul>
+<li>(<strong>Recommended</strong>) Adjusting z-scores with LD block-based permutation
+<ul>
+<li><code>bxcan_ldblock_perm</code>: If want to run this adjustment, set the path to the BED file (TAB-delimited base0 with header chr, start, stop)</li>
+<li><code>bxcan_ldblock_perm_seed</code>: Random seed</li>
+<li><code>bxcan_ldblock_perm_nrepeat</code>: Number of permutation across all IDPs</li>
+<li><code>correction_factor_perm</code>: Correcting the standard error of the simulated z-scores by multiplying with this factor (default = 1.1)</li>
+</ul></li>
+<li>(<strong>Not recommended</strong>) Adjusting z-scores via simulated weights
+<ul>
+<li><code>bxcan_empirical_z</code>: Whether to run this adjustment or not</li>
+<li><code>bxcan_empirical_z_seed</code>: Random seed</li>
+<li><code>bxcan_empirical_z_nrepeat</code>: Number of simulated IDPs</li>
+<li><code>correction_factor_emp</code>: Correcting the standard error of the simulated z-scores by multiplying with this factor</li>
+</ul></li>
 </ul></li>
 <li>Mendelian randomization (MR): extrating a list of significant IDP and run MR
 <ul>
@@ -513,17 +574,19 @@ effect_size_se: &#39;standard_error&#39;</code></pre>
 idp_type: &#39;residual&#39;
 spearman_cutoff: 0.1 
 
-signif_pval: 1e-5
-signif_max_idps: 2  # we set it to a small number since running MR takes time
+signif_pval: 0.01
+signif_max_idps: 20
+gwas_pop: &#39;EUR&#39;
 ld_clump_yaml: &#39;{datadir}/mr/ld_clump.yaml&#39;
 
 rscript_exe: &#39;Rscript&#39; 
 python_exe: &#39;python&#39;
 plink_exe: &#39;plink&#39;</code></pre>
+<p>The full list of parameters available in a BrainXcan configuration YAML is explained (with default values) at <a href="https://github.com/hakyimlab/brainxcan/blob/main/config.example.yaml">here</a></p>
 </div>
 </div>
-<div id="running-brainxcan" class="section level1">
-<h1><span class="header-section-number">5</span> Running BrainXcan</h1>
+<div id="running-brainxcan" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Running BrainXcan</h1>
 <p>Now we are ready to run BrainXcan pipeline. The general command is</p>
 <pre><code># conda activate brainxcan 
 
@@ -602,9 +665,9 @@ snakemake \
   SBrainXcan</code></pre>
 <p>It takes about 9 minutes with 4 Gb memory. The output files are put in folder <code>brainxcan_test/</code> with prefix <code>SCZ_PGC_2020</code>.</p>
 </div>
-<div id="looking-at-the-output-of-brainxcan" class="section level1">
-<h1><span class="header-section-number">6</span> Looking at the output of BrainXcan</h1>
-<p>The output files of the above run can be downloaded from <a href="https://uchicago.box.com/s/1zyx8o6folfy77va7l76o89izelcatnr">here</a>. Here is an overview of the files.</p>
+<div id="looking-at-the-output-of-brainxcan" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Looking at the output of BrainXcan</h1>
+<p>The output files of the above run can be downloaded from <a href="../external_resources/example_run/brainxcan_test.zip">here</a>. Here is an overview of the files.</p>
 <pre><code>brainxcan_test
 ├── SCZ_PGC_2020.report.html
 ├── SCZ_PGC_2020.sbrainxcan.csv
@@ -617,7 +680,8 @@ snakemake \
     │   ├── dmri_IDP-25687.MR_vis.pdf
     │   ├── t1_IDP-25020.MR.rds
     │   ├── t1_IDP-25020.MR_sumstats.tsv
-    │   └── t1_IDP-25020.MR_vis.pdf
+    │   ├── t1_IDP-25020.MR_vis.pdf
+    |   └── [more MR results]
     └── logs
         ├── dmri_IDP-25687.mr.log
         ├── dmri_IDP-25687.mr_vis.log
@@ -628,9 +692,8 @@ snakemake \
         ├── sbxcan_signif.log
         ├── sbxcan_vis.log
         ├── t1_IDP-25020.mr.log
-        └── t1_IDP-25020.mr_vis.log
-
-3 directories, 20 files</code></pre>
+        ├── t1_IDP-25020.mr_vis.log
+        └── [more MR log files]</code></pre>
 <ul>
 <li><code>[prefix].sbrainxcan.csv</code>: BrainXcan association results in CSV format.</li>
 <li><code>[prefix].vis.T1.pdf</code>: Visualization of associations of structural IDPs.</li>
@@ -644,74 +707,119 @@ snakemake \
 <li><code>[prefix].report.html</code>: The automated HTML report summarizing the association and MR results (for diffusion IDPs, only TBSS ones are shown).</li>
 <li><code>[prefix]_files/logs/</code>: Log files of each analysis module.</li>
 </ul>
-<div id="association-output-table" class="section level2">
-<h2><span class="header-section-number">6.1</span> Association output table</h2>
+<div id="association-output-table" class="section level2" number="6.1">
+<h2 number="6.1"><span class="header-section-number">6.1</span> Association output table</h2>
 <p>Let’s take a quick look at <code>brainxcan_test/SCZ_PGC_2020.sbrainxcan.csv</code> (first two rows). The descriptions of each columns are at the bottom of the table.</p>
-<table style="width:100%;">
+<table>
 <caption>Table continues below</caption>
 <colgroup>
-<col width="10%" />
-<col width="12%" />
+<col width="11%" />
 <col width="12%" />
 <col width="14%" />
+<col width="14%" />
+<col width="14%" />
 <col width="11%" />
-<col width="19%" />
-<col width="19%" />
+<col width="20%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="center">IDP</th>
 <th align="center">bhat</th>
 <th align="center">pval</th>
+<th align="center">z_brainxcan</th>
 <th align="center">nsnp_used</th>
 <th align="center">nsnp_total</th>
 <th align="center">CV_R2</th>
-<th align="center">CV_Pearson</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="center">IDP-25020</td>
-<td align="center">0.393</td>
-<td align="center">8.41e-17</td>
-<td align="center">1069344</td>
+<td align="center">0.395</td>
+<td align="center">5.79e-17</td>
+<td align="center">8.37</td>
+<td align="center">1069786</td>
 <td align="center">1071343</td>
 <td align="center">0.0129</td>
-<td align="center">0.114</td>
 </tr>
 <tr class="even">
 <td align="center">IDP-25687</td>
-<td align="center">0.354</td>
-<td align="center">1.74e-14</td>
-<td align="center">1069344</td>
+<td align="center">0.353</td>
+<td align="center">2.1e-14</td>
+<td align="center">7.64</td>
+<td align="center">1069786</td>
 <td align="center">1071343</td>
 <td align="center">0.0128</td>
-<td align="center">0.113</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>IDP ID code (UKB field ID)</strong></td>
 <td align="center"><strong>Estimated effect size of the association test</strong></td>
-<td align="center"><strong>P-value of the association test</strong></td>
+<td align="center"><strong>P-value of the association test (without adjustment)</strong></td>
+<td align="center"><strong>Z-score of the association test (without adjustment)</strong></td>
 <td align="center"><strong>Number of SNPs used in the calculation</strong></td>
 <td align="center"><strong>Total number of SNPs in the prediction model</strong></td>
 <td align="center"><strong>R2 of the prediction model (cross-validated)</strong></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="21%" />
+<col width="21%" />
+<col width="15%" />
+<col width="11%" />
+<col width="13%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">CV_Pearson</th>
+<th align="center">CV_Spearman</th>
+<th align="center">modality</th>
+<th align="center">z_adj_gc</th>
+<th align="center">pval_adj_gc</th>
+<th align="center">z_adj_perm_null</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0.114</td>
+<td align="center">0.109</td>
+<td align="center">T1</td>
+<td align="center">3.13</td>
+<td align="center">0.00176</td>
+<td align="center">4.45</td>
+</tr>
+<tr class="even">
+<td align="center">0.113</td>
+<td align="center">0.11</td>
+<td align="center">dMRI</td>
+<td align="center">2.86</td>
+<td align="center">0.00427</td>
+<td align="center">4.07</td>
+</tr>
+<tr class="odd">
 <td align="center"><strong>Pearson correlation of the prediction model (cross-validated)</strong></td>
+<td align="center"><strong>Spearman correlation of the prediction model (cross-validated)</strong></td>
+<td align="center"><strong>T1 (structural) or dMRI (diffusion)</strong></td>
+<td align="center"><strong>Z-score adjusted by GC</strong></td>
+<td align="center"><strong>P-value adjust by GC</strong></td>
+<td align="center"><strong>Z-score adjusted by permutation</strong></td>
 </tr>
 </tbody>
 </table>
 <table>
 <colgroup>
-<col width="22%" />
-<col width="16%" />
-<col width="14%" />
-<col width="16%" />
-<col width="15%" />
-<col width="16%" />
+<col width="25%" />
+<col width="17%" />
+<col width="19%" />
+<col width="18%" />
+<col width="19%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center">CV_Spearman</th>
-<th align="center">modality</th>
+<th align="center">pval_adj_perm_null</th>
 <th align="center">subtype</th>
 <th align="center">left_or_right</th>
 <th align="center">region</th>
@@ -720,24 +828,21 @@ snakemake \
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">0.109</td>
-<td align="center">T1</td>
+<td align="center">8.53e-06</td>
 <td align="center">Subcortical</td>
 <td align="center">right</td>
 <td align="center">hippocampus</td>
 <td align="center">Volume of right hippocampus (from T1 brain image)</td>
 </tr>
 <tr class="even">
-<td align="center">0.11</td>
-<td align="center">dMRI</td>
+<td align="center">4.79e-05</td>
 <td align="center">w-OD</td>
 <td align="center">NA</td>
 <td align="center">forceps major</td>
 <td align="center">Weighted-mean OD (orientation dispersion index) in tract forceps major (from dMRI data)</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Spearman correlation of the prediction model (cross-validated)</strong></td>
-<td align="center"><strong>T1 (structural) or dMRI (diffusion)</strong></td>
+<td align="center"><strong>P-value adjusted by permutation</strong></td>
 <td align="center"><strong>IDP subtype</strong></td>
 <td align="center"><strong>Left/right side of the brain</strong></td>
 <td align="center"><strong>Anatomical region</strong></td>
@@ -746,8 +851,8 @@ snakemake \
 </tbody>
 </table>
 </div>
-<div id="mendelian-randomization-output-table" class="section level2">
-<h2><span class="header-section-number">6.2</span> Mendelian randomization output table</h2>
+<div id="mendelian-randomization-output-table" class="section level2" number="6.2">
+<h2 number="6.2"><span class="header-section-number">6.2</span> Mendelian randomization output table</h2>
 <p>Let’s take a quick look at <code>brainxcan_test/SCZ_PGC_2020_files/MR_results/dmri_IDP-25687.MR_sumstats.tsv</code> (first two rows). The descriptions of each columns are at the bottom of the table.</p>
 <table>
 <colgroup>
@@ -788,7 +893,7 @@ snakemake \
 <td align="center">Weighted median</td>
 <td align="center">33</td>
 <td align="center">0.0394</td>
-<td align="center">0.475</td>
+<td align="center">0.476</td>
 <td align="center">NA</td>
 <td align="center">NA</td>
 <td align="center">NA</td>
@@ -806,14 +911,14 @@ snakemake \
 </tbody>
 </table>
 </div>
-<div id="visualization-and-report" class="section level2">
-<h2><span class="header-section-number">6.3</span> Visualization and report</h2>
+<div id="visualization-and-report" class="section level2" number="6.3">
+<h2 number="6.3"><span class="header-section-number">6.3</span> Visualization and report</h2>
 <ul>
-<li><a href="../external_resources/figures/SCZ_PGC_2020.vis.T1.pdf">Visualization of structural IDPs</a></li>
-<li><a href="../external_resources/figures/SCZ_PGC_2020.vis.dMRI.pdf">Visualization of diffusion IDPs</a></li>
-<li><a href="../external_resources/pages/SCZ_PGC_2020.report.html">Automated report</a></li>
+<li><a href="../external_resources/example_run/brainxcan_test/SCZ_PGC_2020.vis.T1.pdf">Visualization of structural IDPs</a></li>
+<li><a href="../external_resources/example_run/brainxcan_test/SCZ_PGC_2020.vis.dMRI.pdf">Visualization of diffusion IDPs</a></li>
+<li><a href="../external_resources/example_run/brainxcan_test/SCZ_PGC_2020.report.html">Automated report</a></li>
 </ul>
-<p>We provide interactive HTMLs showning regions in the visualization:</p>
+<p>We provide interactive HTMLs showing regions in the visualization:</p>
 <ul>
 <li><a href="../external_resources/pages/label_Cortical.html">Cortical gray matters</a></li>
 <li><a href="../external_resources/pages/label_Subcortical-GMvol.html">Subcortical gray matters</a></li>
@@ -824,8 +929,8 @@ snakemake \
 <p>These HTMLs can be generated along the BrainXcan visualization by setting <code>bxcan_region_vis=True</code> in the configuration (default: False). The output files will be put inside the folder called <code>[prefix].vis.region_vis/</code>.</p>
 </div>
 </div>
-<div id="extra-notes-on-using-snakemake" class="section level1">
-<h1><span class="header-section-number">7</span> Extra notes on using <code>snakemake</code></h1>
+<div id="extra-notes-on-using-snakemake" class="section level1" number="7">
+<h1 number="7"><span class="header-section-number">7</span> Extra notes on using <code>snakemake</code></h1>
 <p>The BrainXcan software is essentially a data pipeline containing multiple steps and intermediate files. It is implemented using <code>snakemake</code> <span class="citation">Mölder et al. (2021)</span> and the features provided by <code>snakemake</code> are directly applicable here.</p>
 <p>For instance, the parameters in the configuration file can be replaced by <code>--config</code>, e.g. if we want to change the prefix of the output, we can do it without changing the config file:</p>
 <pre><code>snakemake \
@@ -838,13 +943,13 @@ snakemake \
 <p>BrainXcan software is written with snakemake v6. For more cool features of snakemake, please refer to <a href="https://snakemake.readthedocs.io/en/stable/">snakemake documentation</a>.</p>
 </div>
 <div id="references" class="section level1 unnumbered">
-<h1>References</h1>
-<div id="refs" class="references">
-<div id="ref-molder2021sustainable">
-<p>Mölder, Felix, Kim Philipp Jablonski, Brice Letcher, Michael B Hall, Christopher H Tomkins-Tinch, Vanessa Sochat, Jan Forster, et al. 2021. “Sustainable Data Analysis with Snakemake.” <em>F1000Research</em> 10. Faculty of 1000 Ltd.</p>
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-molder2021sustainable" class="csl-entry">
+Mölder, Felix, Kim Philipp Jablonski, Brice Letcher, Michael B Hall, Christopher H Tomkins-Tinch, Vanessa Sochat, Jan Forster, et al. 2021. <span>“Sustainable Data Analysis with Snakemake.”</span> <em>F1000Research</em> 10.
 </div>
-<div id="ref-ripke2020mapping">
-<p>Ripke, Stephan, James TR Walters, Michael C O’Donovan, Schizophrenia Working Group of the Psychiatric Genomics Consortium, and others. 2020. “Mapping Genomic Loci Prioritises Genes and Implicates Synaptic Biology in Schizophrenia.” <em>MedRxiv</em>. Cold Spring Harbor Laboratory Press.</p>
+<div id="ref-ripke2020mapping" class="csl-entry">
+Ripke, Stephan, James TR Walters, Michael C O’Donovan, Schizophrenia Working Group of the Psychiatric Genomics Consortium, and others. 2020. <span>“Mapping Genomic Loci Prioritises Genes and Implicates Synaptic Biology in Schizophrenia.”</span> <em>MedRxiv</em>.
 </div>
 </div>
 </div>
@@ -860,7 +965,7 @@ snakemake \
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -899,7 +1004,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

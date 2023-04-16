@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25098,-0.1533319693502655,6.95580930585438e-07,-4.962593415212176,1069786,1071343,0.026990731665857408,0.1643178633660532,0.15717369494211805,dMRI,-1.8550614223116118,0.0635874559148564,-2.639488365313895,0.008303127324500047,FA,right,superior fronto-occipital fasciculus,Mean FA (fractional anisotropy) in superior fronto-occipital fasciculus (right) on FA skeleton (from dMRI data)

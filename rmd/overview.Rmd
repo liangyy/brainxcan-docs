@@ -15,7 +15,7 @@ It turns out that BrainXcan analysis can be performed using GWAS summary statist
 1. Summary-based BrainXcan (S-BrainXcan) which returns the association between brain IDP and the phenotype; 
 2. Mendelian randomization (MR) between the significant IDP and the phenotype to provide additional evidence of the causal flow (IDP <-?-> phenotype).
 
-Please refer to [BrainXcan paper](to_be_filled) for more details.
+Please refer to [BrainXcan paper](https://www.medrxiv.org/content/10.1101/2021.06.01.21258159v2) for more details.
 
 # What is brainxcan software doing?
 

@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25407,0.17740664547041962,5.8866344750882674e-08,5.4222109796702425,1069786,1071343,0.03154075915500587,0.17777104043892092,0.17104440745868915,dMRI,2.0268705433710545,0.04267565371753626,2.883948290272125,0.003927232343667823,OD,left,cerebral peduncle,Mean OD (orientation dispersion index) in cerebral peduncle (left) on FA (fractional anisotropy) skeleton (from dMRI data)

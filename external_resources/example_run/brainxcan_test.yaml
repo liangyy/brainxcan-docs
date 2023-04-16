@@ -1,0 +1,32 @@
+# input/output paths
+datadir: 'path-to-braixcan-database/brainxcan_data'
+outdir: 'brainxcan_test'
+prefix: 'SCZ_PGC_2020'
+brainxcan_path: 'path-to-brainxcan-repository/brainxcan'
+
+# GWAS meta information
+gwas: 'formatted.SCZ_PGC_2020.tsv.gz'
+snpid: 'variant_id'
+effect_allele: 'effect_allele'
+non_effect_allele: 'non_effect_allele'
+chr: 'chromosome'
+effect_size: 'effect_size'
+effect_size_se: 'standard_error'
+position: 'position'
+
+# LD block for permutation
+bxcan_ldblock_perm: 'path-to-ldblock-bed'
+
+# parameters in BrainXcan
+model_type: 'ridge'
+idp_type: 'residual'
+spearman_cutoff: 0.1 
+
+signif_pval: 0.01
+signif_max_idps: 20
+gwas_pop: 'EUR'
+ld_clump_yaml: '{datadir}/mr/ld_clump.yaml'
+
+rscript_exe: 'Rscript' 
+python_exe: 'python'
+plink_exe: 'plink'

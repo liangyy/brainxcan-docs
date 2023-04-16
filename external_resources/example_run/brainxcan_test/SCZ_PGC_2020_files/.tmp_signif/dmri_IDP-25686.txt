@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
+IDP-25686,-0.14771705125192836,7.075601611493773e-07,-4.959277003417031,1069786,1071343,0.023012139598510232,0.15213176044661386,0.1420621646149806,dMRI,-1.8538217181757035,0.06376467027336888,-2.6377244427807613,0.008346437294507663,w-OD,right,corticospinal tract,Weighted-mean OD (orientation dispersion index) in tract right corticospinal tract (from dMRI data)
