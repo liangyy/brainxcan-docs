@@ -8,7 +8,7 @@ navbar:
     - text: "Home"
       href: index.html
   right:
-    - icon: fa-github
+    - icon: fab fa-github
       href: https://github.com/liangyy/brainxcan-docs
 output:
   html_document:
