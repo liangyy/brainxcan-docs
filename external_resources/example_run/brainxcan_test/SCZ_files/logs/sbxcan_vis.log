@@ -1,0 +1,29 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+oro.nifti 0.11.4
+
+Attaching package: ‘oro.nifti’
+
+The following object is masked from ‘package:dplyr’:
+
+    slice
+
+2025-01-29 18:07:25.457125 INFO::Loading BrainXcan results. pval_col = pval_adj_vc
+2025-01-29 18:07:25.506184 INFO::Plotting for all tags.
+2025-01-29 18:07:25.534838 INFO::Tag = Subcortical-vol
+2025-01-29 18:07:59.843964 INFO::Tag = Subcortical-GMvol
+2025-01-29 18:08:04.105376 INFO::Tag = Cortical
+2025-01-29 18:08:16.441131 INFO::Tag = Cerebellum
+2025-01-29 18:08:20.471663 INFO::Tag = TBSS-ICVF
+2025-01-29 18:08:25.208996 INFO::Tag = TBSS-ISOVF
+2025-01-29 18:08:29.866598 INFO::Tag = TBSS-FA
+2025-01-29 18:08:34.694014 INFO::Tag = TBSS-OD

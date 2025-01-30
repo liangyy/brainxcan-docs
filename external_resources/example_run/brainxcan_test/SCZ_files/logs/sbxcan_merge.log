@@ -1,0 +1,10 @@
+2025-01-29 05:09:28 PM  Loading S-BrainXcan dMRI.
+2025-01-29 05:09:28 PM  218 IDPs in total.
+2025-01-29 05:09:28 PM  Loading S-BrainXcan T1.
+2025-01-29 05:09:28 PM  109 IDPs in total.
+2025-01-29 05:09:28 PM  Generating adjusted BrainXcan z-score.
+2025-01-29 05:09:28 PM  GC lambda = 7.175568486912497.
+2025-01-29 05:09:28 PM  Generating adjusted BrainXcan z-score using variance control.
+2025-01-29 05:09:28 PM  Loading the IDP meta file.
+2025-01-29 05:09:28 PM  Saving outputs.
+2025-01-29 05:09:28 PM  Done.

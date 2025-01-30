@@ -1,0 +1,218 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+TwoSampleMR version 0.6.8 
+
+  [>] New authentication requirements: https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication.
+  [>] Major upgrades to our servers completed to improve service and stability.
+  [>] We need your help to shape our emerging roadmap!
+      Please take 2 minutes to give us feedback -
+      https://forms.office.com/e/eSr7EFAfCG
+2025-01-29 18:20:22.482364 INFO::Loading LD clumping YAML.
+2025-01-29 18:20:22.501785 INFO::Loading phenotype GWAS.
+2025-01-29 18:20:25.315175 INFO::Loading IDP GWAS.
+2025-01-29 18:20:34.910876 INFO::Keeping the common SNPs between phenotype and IDP.
+2025-01-29 18:20:35.892773 INFO::1069577 SNPs are kept.
+2025-01-29 18:20:35.89367 INFO::Preparing IDP and phenotype data.frames.
+No phenotype name specified, defaulting to 'exposure'.
+Inferring p-values
+Warning message:
+In format_data(idp_df) :
+  The following columns are not present but are helpful for harmonisation
+eaf
+
+No phenotype name specified, defaulting to 'exposure'.
+Inferring p-values
+Warning messages:
+1: In format_data(pheno_df) :
+  The following columns are not present but are helpful for harmonisation
+eaf
+
+2: In format_data(pheno_df) :
+  The following SNP(s) are missing required information for the MR tests and will be excluded
+rs2643888
+rs2298222
+rs11805709
+rs17375504
+rs731975
+rs2039631
+rs910660
+rs11589841
+rs2282188
+rs1412838
+rs1203696
+rs7527299
+rs4661314
+rs7543472
+rs11203405
+rs1934057
+rs2743208
+rs4912029
+rs12062540
+rs17393888
+rs6665756
+rs3934191
+rs3117048
+rs1267001
+rs2007200
+rs627304
+rs2092933
+rs2885174
+rs11582016
+rs11590815
+rs6670784
+rs4949220
+rs51397
+rs7545143
+rs10914387
+rs10914392
+rs10914393
+rs7548805
+rs2889750
+rs644879
+rs487736
+rs483069
+rs1741961
+rs4653091
+rs6685558
+rs17540712
+rs12061942
+rs3131673
+rs3122415
+rs1317558
+rs393950
+rs496684
+rs1408948
+rs2042065
+rs12410860
+rs12121067
+rs710222
+rs12126734
+rs1181094
+rs769977
+rs7540718
+rs11585751
+rs12402927
+rs338251
+rs17119329
+rs10493318
+rs2803241
+rs17124399
+rs6689998
+rs716592
+rs11208645
+rs10789252
+rs1065629
+rs12026468
+rs1590639
+rs6603933
+rs2149277
+rs720887
+rs1686334
+rs17102358
+rs11162867
+rs10493657
+rs4317851
+rs7518107
+rs7549211
+rs12033483
+rs4912448
+rs36002452
+rs1882753
+rs75 [... truncated]
+2025-01-29 18:23:05.274394 INFO::Working on IDP -> Phenotype.
+Clumping xFBYOq, 1069577 variants, using EUR population reference
+PLINK v1.9.0-b.7.7 64-bit (22 Oct 2024)            cog-genomics.org/plink/1.9/
+(C) 2005-2024 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to /var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpQwnnKB/file4e26419112e.log.
+Options in effect:
+  --bfile /Users/yanyuluchicago/Desktop/rerun_brainxcan/brainxcan_data/mr/ieugwasr/EUR
+  --clump /var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpQwnnKB/file4e26419112e
+  --clump-kb 10000
+  --clump-p1 1e-5
+  --clump-r2 0.001
+  --out /var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpQwnnKB/file4e26419112e
+
+16384 MB RAM detected; reserving 8192 MB for main workspace.
+8550156 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+/var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpQwnnKB/file4e26419112e.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... 0%1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99% done.
+Total genotyping rate is in [0.9999995, 1).
+8550156 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+Warning: 'rs3822328' is missing from the main dataset, and is a top variant.
+Warning: 'rs250426' is missing from the main dataset, and is a top variant.
+Warning: 'rs7356554' is missing from the main dataset, and is a top variant.
+1 more top variant ID missing; see log file.
+--clump: 48 clumps formed from 374 top variants.
+Results written to
+/var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpQwnnKB/file4e26419112e.clumped
+.
+Removing 1069529 of 1069577 variants due to LD with other variants or absence from LD reference panel
+No phenotype name specified, defaulting to 'outcome'.
+Inferring p-values
+Harmonising exposure (xFBYOq) and outcome (juggic)
+Analysing 'xFBYOq' on 'juggic'
+Warning message:
+In format_data(outcome, type = "outcome", snps = clumped_exp_dat$SNP) :
+  The following columns are not present but are helpful for harmonisation
+eaf
+
+2025-01-29 18:23:24.966931 INFO::Working on Phenotype -> IDP.
+Clumping XQOzyk, 1069577 variants, using EUR population reference
+PLINK v1.9.0-b.7.7 64-bit (22 Oct 2024)            cog-genomics.org/plink/1.9/
+(C) 2005-2024 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to /var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpQwnnKB/file4e269b6e51c.log.
+Options in effect:
+  --bfile /Users/yanyuluchicago/Desktop/rerun_brainxcan/brainxcan_data/mr/ieugwasr/EUR
+  --clump /var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpQwnnKB/file4e269b6e51c
+  --clump-kb 10000
+  --clump-p1 5e-8
+  --clump-r2 0.001
+  --out /var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpQwnnKB/file4e269b6e51c
+
+16384 MB RAM detected; reserving 8192 MB for main workspace.
+8550156 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+/var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpQwnnKB/file4e269b6e51c.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... 0%1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99% done.
+Total genotyping rate is in [0.9999995, 1).
+8550156 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+Warning: 'rs429479' is missing from the main dataset, and is a top variant.
+Warning: 'rs778341' is missing from the main dataset, and is a top variant.
+Warning: 'rs2062322' is missing from the main dataset, and is a top variant.
+17 more top variant IDs missing; see log file.
+--clump: 165 clumps formed from 4357 top variants.
+Results written to
+/var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpQwnnKB/file4e269b6e51c.clumped
+.
+Removing 1069412 of 1069577 variants due to LD with other variants or absence from LD reference panel
+No phenotype name specified, defaulting to 'outcome'.
+Inferring p-values
+Harmonising exposure (XQOzyk) and outcome (xCOxf0)
+Analysing 'XQOzyk' on 'xCOxf0'
+Warning message:
+In format_data(outcome, type = "outcome", snps = clumped_exp_dat$SNP) :
+  The following columns are not present but are helpful for harmonisation
+eaf
+
+2025-01-29 18:23:43.677473 INFO::Saving results.
+2025-01-29 18:23:43.682915 INFO::Done.

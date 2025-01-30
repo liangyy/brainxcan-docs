@@ -1,2 +1,0 @@
-IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
-IDP-25869,-0.2451237781033231,4.8531477301769076e-08,-5.456608499598294,1069786,1071343,0.016339397597407882,0.12807802029336585,0.121904642471676,T1,-2.0397286413256697,0.041377360585561435,-2.9022435335147896,0.003705003911986379,Gray-Cortical,right,planum polare,Volume of grey matter in Right Planum Polare

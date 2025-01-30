@@ -1,0 +1,2 @@
+IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,phi,z_adj_vc,varz_vc,pval_adj_vc,subtype,left_or_right,region,notes
+IDP-25020,0.26092841356637525,8.587192608461349e-17,8.322851607160985,1069344,1071343,0.012929206095929069,0.11371063090741165,0.10866065248155994,T1,3.1070196110697084,0.0018898386126989138,5.395494182724421e-05,4.2325616365648076,3.8666754442397386,2.310445650050884e-05,Subcortical,right,hippocampus,Volume of right hippocampus (from T1 brain image)

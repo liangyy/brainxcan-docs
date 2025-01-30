@@ -102,7 +102,7 @@ In the configuration YAML, we have:
 ```
 datadir: 'path-to-braixcan-database/brainxcan_data'
 outdir: 'brainxcan_test'
-prefix: 'SCZ_PGC_2020'
+prefix: 'SCZ'
 brainxcan_path: 'path-to-brainxcan-repository/brainxcan'
 ```
 
@@ -151,7 +151,13 @@ There are several parameters underlying a BrainXcan run. They are associated wit
     - `idp_type`: IDP sets to use: `original` or `residual` (after PC adjustment) (**Default** = `residual`)
     - `spearman_cutoff`: CV Spearman cutoff on models (only models passing this criteria will be shown) (**Default** = `0.1`)
 * BrainXcan adjustment options
-    - (**Recommended**) Adjusting z-scores with LD block-based permutation
+    - (**Recommended**) Adjusting z-scores with variance control (The method details are described [here](https://www.biorxiv.org/content/10.1101/2023.10.17.562831v2))
+        + It requires GWAS effective sample size, GWAS trait heritability, and pre-computed phi values for IDP models (IDP phi values can be downloaded from [here](../external_resources/data/idps-phi.txt)) 
+        + `pheno_h2`: GWAS trait heritability (SNP heritability - e.g. it can be estimated from LDSC regression)
+        + `gwas_n`: GWAS effective sample size
+        + `bxcan_vc_z`: Set to True when want run this adjustment
+        + `bxcan_vc_phi`: Path to the phi value file
+    - (**Not recommended**) Adjusting z-scores with LD block-based permutation
         + `bxcan_ldblock_perm`: If want to run this adjustment, set the path to the BED file (TAB-delimited base0 with header chr, start, stop)
         + `bxcan_ldblock_perm_seed`: Random seed
         + `bxcan_ldblock_perm_nrepeat`: Number of permutation across all IDPs
@@ -162,6 +168,7 @@ There are several parameters underlying a BrainXcan run. They are associated wit
         + `bxcan_empirical_z_nrepeat`: Number of simulated IDPs
         + `correction_factor_emp`: Correcting the standard error of the simulated z-scores by multiplying with this factor
 * Mendelian randomization (MR): extrating a list of significant IDP and run MR
+    - `fdr_cutoff`: FDR cutoff to call an IDP significant (**Default** = 0.1). This will overwrite `signif_pval` below.
     - `signif_pval`: P-value cutoff to call an IDP significant (**Default** = `1e-5`)
     - `signif_max_idps`: Maximun number of IDPs to run MR (discard by p-value if too many IDPs passing p-value filter) (**Default** = `10`)
     - `ld_clump_yaml`: Parameters of LD clumping for defining the instrument SNPs in MR (**Default** = `{datadir}/mr/ld_clump.yaml`)$\dagger$   
@@ -178,8 +185,9 @@ model_type: 'ridge'
 idp_type: 'residual'
 spearman_cutoff: 0.1 
 
+fdr_cutoff: 0.1
 signif_pval: 0.01
-signif_max_idps: 20
+signif_max_idps: 5
 gwas_pop: 'EUR'
 ld_clump_yaml: '{datadir}/mr/ld_clump.yaml'
 
@@ -248,7 +256,7 @@ snakemake \
   SBrainXcan
 ```
 
-It takes about 9 minutes with 4 Gb memory. The output files are put in folder `brainxcan_test/` with prefix `SCZ_PGC_2020`.
+It takes about 9 minutes with 4 Gb memory. The output files are put in folder `brainxcan_test/` with prefix `SCZ`.
 
 # Looking at the output of BrainXcan
 
@@ -257,30 +265,31 @@ Here is an overview of the files.
 
 ```
 brainxcan_test
-├── SCZ_PGC_2020.report.html
-├── SCZ_PGC_2020.sbrainxcan.csv
-├── SCZ_PGC_2020.vis.T1.pdf
-├── SCZ_PGC_2020.vis.dMRI.pdf
-└── SCZ_PGC_2020_files
+├── SCZ.report.Rmd
+├── SCZ.report.html
+├── SCZ.sbrainxcan.csv
+├── SCZ.vis.T1.pdf
+├── SCZ.vis.dMRI.pdf
+└── SCZ_files
     ├── MR_results
     │   ├── dmri_IDP-25687.MR.rds
     │   ├── dmri_IDP-25687.MR_sumstats.tsv
     │   ├── dmri_IDP-25687.MR_vis.pdf
+    │   ├── dmri_PC-FA-TBSS-1.MR.rds
+    │   ├── dmri_PC-FA-TBSS-1.MR_sumstats.tsv
+    │   ├── dmri_PC-FA-TBSS-1.MR_vis.pdf
+    │   ├── dmri_PC-ICVF-ProbTrack-1.MR.rds
+    │   ├── dmri_PC-ICVF-ProbTrack-1.MR_sumstats.tsv
+    │   ├── dmri_PC-ICVF-ProbTrack-1.MR_vis.pdf
+    │   ├── dmri_PC-ICVF-TBSS-1.MR.rds
+    │   ├── dmri_PC-ICVF-TBSS-1.MR_sumstats.tsv
+    │   ├── dmri_PC-ICVF-TBSS-1.MR_vis.pdf
     │   ├── t1_IDP-25020.MR.rds
     │   ├── t1_IDP-25020.MR_sumstats.tsv
-    │   ├── t1_IDP-25020.MR_vis.pdf
-    |   └── [more MR results]
+    │   └── t1_IDP-25020.MR_vis.pdf
     └── logs
         ├── dmri_IDP-25687.mr.log
         ├── dmri_IDP-25687.mr_vis.log
-        ├── sbrainxcan_dmri.log
-        ├── sbrainxcan_t1.log
-        ├── sbxcan_merge.log
-        ├── sbxcan_report.log
-        ├── sbxcan_signif.log
-        ├── sbxcan_vis.log
-        ├── t1_IDP-25020.mr.log
-        ├── t1_IDP-25020.mr_vis.log
         └── [more MR log files]
 ```
 
@@ -296,16 +305,16 @@ brainxcan_test
 
 ## Association output table
 
-Let's take a quick look at `brainxcan_test/SCZ_PGC_2020.sbrainxcan.csv` (first two rows). 
+Let's take a quick look at `brainxcan_test/SCZ.sbrainxcan.csv` (first two rows). 
 The descriptions of each columns are at the bottom of the table.
 
 ```{r, results='asis'}
 library(dplyr)
 library(pander)
-dd = read.csv('~/Downloads/brainxcan_test/SCZ_PGC_2020.sbrainxcan.csv', stringsAsFactors = F)
+dd = read.csv('../external_resources/example_run/brainxcan_test/SCZ.sbrainxcan.csv', stringsAsFactors = F)
 dd$nsnp_used = as.character(dd$nsnp_used)
 dd$nsnp_total = as.character(dd$nsnp_total)
-rbind(
+dplyr::bind_rows(
   head(dd, 2) %>% mutate_if(is.numeric, signif, digits = 3), 
   data.frame(
     IDP = 'IDP ID code (UKB field ID)', 
@@ -322,6 +331,13 @@ rbind(
     pval_adj_gc = 'P-value adjust by GC',
     z_adj_perm_null = 'Z-score adjusted by permutation',
     pval_adj_perm_null = 'P-value adjusted by permutation',
+    z_adj_vc = 'Z-score adjusted by variance control',
+    pval_adj_vc = 'P-value adjust by variance control',
+    pval_adj_vc = 'P-value adjust by variance control',
+    phi = 'Phi value used for the IDP model',
+    varz_vc = 'Estimated correction factor used for variance control',
+    z_adj_perm_null = 'Z-score adjusted by permutation',
+    pval_adj_perm_null = 'P-value adjusted by permutation',
     subtype = 'IDP subtype',
     left_or_right = 'Left/right side of the brain',
     region = 'Anatomical region',
@@ -332,10 +348,10 @@ rbind(
 
 ## Mendelian randomization output table
 
-Let's take a quick look at `brainxcan_test/SCZ_PGC_2020_files/MR_results/dmri_IDP-25687.MR_sumstats.tsv` (first two rows). 
+Let's take a quick look at `brainxcan_test/SCZ_files/MR_results/dmri_PC-FA-TBSS-1.MR_sumstats.tsv` (first two rows). 
 The descriptions of each columns are at the bottom of the table.
 ```{r, results='asis'}
-dd = read.delim2('~/Downloads/brainxcan_test/SCZ_PGC_2020_files/MR_results/dmri_IDP-25687.MR_sumstats.tsv', stringsAsFactors = F)
+dd = read.delim2('../external_resources/example_run/brainxcan_test/SCZ_files/MR_results/dmri_PC-FA-TBSS-1.MR_sumstats.tsv', stringsAsFactors = F)
 dd$b = as.numeric(dd$b)
 dd$pval = as.numeric(dd$pval)
 dd$Q = as.numeric(dd$Q)

@@ -1,2 +1,0 @@
-IDP,bhat,pval,z_brainxcan,nsnp_used,nsnp_total,CV_R2,CV_Pearson,CV_Spearman,modality,z_adj_gc,pval_adj_gc,z_adj_perm_null,pval_adj_perm_null,subtype,left_or_right,region,notes
-IDP-25487,0.22314850328082653,6.921207588759657e-07,4.963561599585769,1069786,1071343,0.015593144108378532,0.12531225867611326,0.12430165015466225,dMRI,1.8554233382154284,0.06353579722683902,2.640003320132024,0.00829052150186335,ISOVF,left,tapetum,Mean ISOVF (isotropic or free water volume fraction) in tapetum (left) on FA (fractional anisotropy) skeleton (from dMRI data)

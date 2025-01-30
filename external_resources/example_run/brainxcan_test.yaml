@@ -1,7 +1,7 @@
 # input/output paths
 datadir: 'path-to-braixcan-database/brainxcan_data'
 outdir: 'brainxcan_test'
-prefix: 'SCZ_PGC_2020'
+prefix: 'SCZ'
 brainxcan_path: 'path-to-brainxcan-repository/brainxcan'
 
 # GWAS meta information
@@ -14,16 +14,20 @@ effect_size: 'effect_size'
 effect_size_se: 'standard_error'
 position: 'position'
 
-# LD block for permutation
-bxcan_ldblock_perm: 'path-to-ldblock-bed'
+# Flags needed for variance control correction
+pheno_h2: 0.7261
+gwas_n: 73173
+bxcan_vc_z: True
+bxcan_vc_phi: 'idps-phi.txt' 
 
 # parameters in BrainXcan
 model_type: 'ridge'
 idp_type: 'residual'
 spearman_cutoff: 0.1 
 
+fdr_cutoff: 0.1
 signif_pval: 0.01
-signif_max_idps: 20
+signif_max_idps: 5
 gwas_pop: 'EUR'
 ld_clump_yaml: '{datadir}/mr/ld_clump.yaml'
 

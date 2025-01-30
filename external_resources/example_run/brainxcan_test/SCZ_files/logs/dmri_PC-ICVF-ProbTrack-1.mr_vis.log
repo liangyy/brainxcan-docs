@@ -1,0 +1,15 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+2025-01-29 18:20:20.280296 INFO::Loading MR RDS and BrainXcan 1-line result.
+2025-01-29 18:20:20.298404 INFO::Plotting.
+2025-01-29 18:20:20.962737 INFO::Collecting summary of results.
+2025-01-29 18:20:21.027645 INFO::Done.

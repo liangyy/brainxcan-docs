@@ -1,0 +1,45 @@
+
+
+processing file: SCZ.report.Rmd
+1/36                             
+2/36 [setup]                     
+3/36                             
+4/36 [parameters]                
+5/36                             
+6/36 [load_meta]                 
+7/36                             
+8/36 [load_results]              
+9/36                             
+10/36 [subset_to_idp_main_results]
+11/36                             
+12/36 [bonforroni_cutoffs]        
+13/36                             
+14/36 [qvalue]                    
+15/36                             
+16/36 [fdr]                       
+17/36                             
+18/36 [show_count]                
+19/36                             
+variance control adjusted p-values
+20/36 [vis_t1]                    
+21/36                             
+22/36 [vis_dmri]                  
+23/36                             
+24/36 [vis_t12]                   
+25/36                             
+26/36 [vis_dmri2]                 
+27/36                             
+28/36 [load_mr]                   
+29/36                             
+30/36 [dmri_top_n]                
+31/36                             
+32/36 [t1_top_n]                  
+33/36                             
+34/36 [bxcan_figures]             
+35/36                             
+36/36 [mr_figures]                
+output file: SCZ.report.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS SCZ.report.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output /Users/yanyuluchicago/Desktop/rerun_brainxcan/output/SCZ.report.html --lua-filter /Users/yanyuluchicago/Documents/softwares/miniconda3/envs/r_36/lib/R/library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /Users/yanyuluchicago/Documents/softwares/miniconda3/envs/r_36/lib/R/library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --table-of-contents --toc-depth 3 --variable toc_float=1 --variable toc_selectors=h1,h2,h3 --variable toc_collapsed=1 --variable toc_smooth_scroll=1 --variable toc_print=1 --template /Users/yanyuluchicago/Documents/softwares/miniconda3/envs/r_36/lib/R/library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --number-sections --variable theme=cosmo --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /var/folders/dp/3z9znr31491c8t0s8k8vckqc0000gp/T//RtmpPSnkmX/rmarkdown-str66db5289e9a.html 
+
+Output created: output/SCZ.report.html

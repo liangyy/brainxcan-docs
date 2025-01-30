@@ -1,0 +1,75 @@
+2025-01-29 05:00:25 PM  Loading GWAS.
+2025-01-29 05:00:31 PM  GWAS SNP = 1071718
+2025-01-29 05:00:31 PM  Loading IDP weights.
+2025-01-29 05:00:44 PM  IDP SNP = 1071343 and number of IDPs = 109
+2025-01-29 05:00:44 PM  Harmonizing GWAS and IDP weights.
+2025-01-29 05:00:58 PM  1069344 SNPs left after harmonizing GWAS and IDP weights.
+2025-01-29 05:01:01 PM  Chromosome 1: Loading genotype covariance meta information.
+2025-01-29 05:01:04 PM  Step0 Chromosome 1: 88097 out of 88097 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:04 PM  Step1 Chromosome 1: Working with genotype covariance.
+2025-01-29 05:01:08 PM  Chromosome 2: Loading genotype covariance meta information.
+2025-01-29 05:01:09 PM  Step0 Chromosome 2: 89238 out of 89238 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:09 PM  Step1 Chromosome 2: Working with genotype covariance.
+2025-01-29 05:01:13 PM  Chromosome 3: Loading genotype covariance meta information.
+2025-01-29 05:01:14 PM  Step0 Chromosome 3: 74223 out of 74223 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:14 PM  Step1 Chromosome 3: Working with genotype covariance.
+2025-01-29 05:01:17 PM  Chromosome 4: Loading genotype covariance meta information.
+2025-01-29 05:01:17 PM  Step0 Chromosome 4: 66339 out of 66339 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:17 PM  Step1 Chromosome 4: Working with genotype covariance.
+2025-01-29 05:01:20 PM  Chromosome 5: Loading genotype covariance meta information.
+2025-01-29 05:01:21 PM  Step0 Chromosome 5: 68468 out of 68468 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:21 PM  Step1 Chromosome 5: Working with genotype covariance.
+2025-01-29 05:01:25 PM  Chromosome 6: Loading genotype covariance meta information.
+2025-01-29 05:01:26 PM  Step0 Chromosome 6: 71666 out of 71666 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:26 PM  Step1 Chromosome 6: Working with genotype covariance.
+2025-01-29 05:01:29 PM  Chromosome 7: Loading genotype covariance meta information.
+2025-01-29 05:01:30 PM  Step0 Chromosome 7: 58770 out of 58770 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:30 PM  Step1 Chromosome 7: Working with genotype covariance.
+2025-01-29 05:01:33 PM  Chromosome 8: Loading genotype covariance meta information.
+2025-01-29 05:01:33 PM  Step0 Chromosome 8: 58019 out of 58019 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:33 PM  Step1 Chromosome 8: Working with genotype covariance.
+2025-01-29 05:01:36 PM  Chromosome 9: Loading genotype covariance meta information.
+2025-01-29 05:01:36 PM  Step0 Chromosome 9: 48864 out of 48864 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:36 PM  Step1 Chromosome 9: Working with genotype covariance.
+2025-01-29 05:01:39 PM  Chromosome 10: Loading genotype covariance meta information.
+2025-01-29 05:01:39 PM  Step0 Chromosome 10: 57225 out of 57225 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:39 PM  Step1 Chromosome 10: Working with genotype covariance.
+2025-01-29 05:01:42 PM  Chromosome 11: Loading genotype covariance meta information.
+2025-01-29 05:01:42 PM  Step0 Chromosome 11: 54572 out of 54572 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:42 PM  Step1 Chromosome 11: Working with genotype covariance.
+2025-01-29 05:01:45 PM  Chromosome 12: Loading genotype covariance meta information.
+2025-01-29 05:01:45 PM  Step0 Chromosome 12: 52954 out of 52954 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:45 PM  Step1 Chromosome 12: Working with genotype covariance.
+2025-01-29 05:01:48 PM  Chromosome 13: Loading genotype covariance meta information.
+2025-01-29 05:01:48 PM  Step0 Chromosome 13: 40261 out of 40261 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:48 PM  Step1 Chromosome 13: Working with genotype covariance.
+2025-01-29 05:01:50 PM  Chromosome 14: Loading genotype covariance meta information.
+2025-01-29 05:01:50 PM  Step0 Chromosome 14: 35350 out of 35350 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:50 PM  Step1 Chromosome 14: Working with genotype covariance.
+2025-01-29 05:01:52 PM  Chromosome 15: Loading genotype covariance meta information.
+2025-01-29 05:01:52 PM  Step0 Chromosome 15: 32238 out of 32238 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:52 PM  Step1 Chromosome 15: Working with genotype covariance.
+2025-01-29 05:01:53 PM  Chromosome 16: Loading genotype covariance meta information.
+2025-01-29 05:01:54 PM  Step0 Chromosome 16: 32929 out of 32929 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:54 PM  Step1 Chromosome 16: Working with genotype covariance.
+2025-01-29 05:01:55 PM  Chromosome 17: Loading genotype covariance meta information.
+2025-01-29 05:01:56 PM  Step0 Chromosome 17: 29264 out of 29264 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:56 PM  Step1 Chromosome 17: Working with genotype covariance.
+2025-01-29 05:01:57 PM  Chromosome 18: Loading genotype covariance meta information.
+2025-01-29 05:01:57 PM  Step0 Chromosome 18: 31761 out of 31761 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:57 PM  Step1 Chromosome 18: Working with genotype covariance.
+2025-01-29 05:01:59 PM  Chromosome 19: Loading genotype covariance meta information.
+2025-01-29 05:01:59 PM  Step0 Chromosome 19: 20117 out of 20117 SNPs in IDP/GWAS are used.
+2025-01-29 05:01:59 PM  Step1 Chromosome 19: Working with genotype covariance.
+2025-01-29 05:02:00 PM  Chromosome 20: Loading genotype covariance meta information.
+2025-01-29 05:02:00 PM  Step0 Chromosome 20: 28078 out of 28078 SNPs in IDP/GWAS are used.
+2025-01-29 05:02:00 PM  Step1 Chromosome 20: Working with genotype covariance.
+2025-01-29 05:02:01 PM  Chromosome 21: Loading genotype covariance meta information.
+2025-01-29 05:02:02 PM  Step0 Chromosome 21: 15255 out of 15255 SNPs in IDP/GWAS are used.
+2025-01-29 05:02:02 PM  Step1 Chromosome 21: Working with genotype covariance.
+2025-01-29 05:02:02 PM  Chromosome 22: Loading genotype covariance meta information.
+2025-01-29 05:02:03 PM  Step0 Chromosome 22: 15656 out of 15656 SNPs in IDP/GWAS are used.
+2025-01-29 05:02:03 PM  Step1 Chromosome 22: Working with genotype covariance.
+2025-01-29 05:02:03 PM  Step2: Computing marginal test.
+2025-01-29 05:02:03 PM  Saving outputs.
+2025-01-29 05:02:03 PM  Done.

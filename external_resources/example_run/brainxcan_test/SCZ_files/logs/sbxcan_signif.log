@@ -1,0 +1,8 @@
+2025-01-29 06:08:46 PM  Loading S-BrainXcan.
+2025-01-29 06:08:46 PM  327 IDPs in total.
+2025-01-29 06:08:46 PM  Applying criteria: p-value cutoff = 0.01 and pval column = pval_adj_vc
+2025-01-29 06:08:46 PM  18 IDPs pass the criteria.
+2025-01-29 06:08:46 PM  Taking top 5 IDPs.
+2025-01-29 06:08:46 PM  Select 5 IDPs with p-value <= 0.001058666440496245
+2025-01-29 06:08:46 PM  Saving outputs.
+2025-01-29 06:08:46 PM  Done.

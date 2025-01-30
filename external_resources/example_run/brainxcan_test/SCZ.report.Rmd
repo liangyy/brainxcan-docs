@@ -1,0 +1,253 @@
+---
+output:
+  html_document: 
+    self_contained: yes
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    number_sections: true
+    theme: cosmo
+params:
+  phenotype_name: "phenotype of interest"
+  color_code_yaml: NA
+  input_prefix: NA
+  rlib: NA
+  ntop: 10
+  bxcan_pval_col: 'pval'
+  fdr_cutoff: 0.05
+title: "`r paste0('BrainXcan results for ', params$phenotype_name)`"
+---
+
+
+```{r setup, include=FALSE}
+suppressMessages(library(dplyr))
+suppressMessages(library(ggplot2))
+suppressMessages(library(pander))
+options(stringsAsFactors = FALSE)
+theme_set(theme_classic(base_size = 12))
+panderOptions('table.split.table', Inf)
+source(params$rlib)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r parameters}
+input_prefix = params$input_prefix
+meta_file = params$meta_file
+color_code_yaml = params$color_code_yaml
+phenotype_name = params$phenotype_name
+ntop = params$ntop
+bxcan_pval_col = params$bxcan_pval_col
+fdr_cutoff = params$fdr_cutoff
+pval_col_to_name = list(
+  pval = 'raw p-values from BrainXcan',
+  pval_adj_emp_null = 'adjusted p-values based on simulated weights',
+  pval_adj_perm_null = 'adjusted p-values based on permuted weights',
+  pval_adj_vc = 'variance control adjusted p-values'
+)
+pval_col_to_zscore_col = list(
+  pval = 'z_brainxcan',
+  pval_adj_emp_null = 'z_adj_perm_null',
+  pval_adj_perm_null = 'z_adj_perm_null',
+  pval_adj_vc = 'z_adj_vc'
+)
+```
+
+```{r load_meta}
+# gannot = read.csv(meta_file)
+color_map = load_color_code_yaml(color_code_yaml)
+```
+
+```{r load_results}
+bxcan_file = paste0(input_prefix, '.sbrainxcan.csv')
+sbxcan = read.csv(bxcan_file)
+z_col = pval_col_to_zscore_col[[bxcan_pval_col]]
+if(!is.null(z_col)) {
+  if(z_col %in% colnames(sbxcan)) {
+    sbxcan$zscore = sbxcan[[z_col]]
+  } else {
+    sbxcan = sbxcan %>% mutate(zscore = abs( qnorm(!!sym(bxcan_pval_col)/2) ) * sign(bhat))
+  }
+} else {
+  sbxcan = sbxcan %>% mutate(zscore = abs( qnorm(!!sym(bxcan_pval_col)/2) ) * sign(bhat))
+}
+allxcan = sbxcan
+```
+
+```{r subset_to_idp_main_results}
+allxcan_annot = allxcan # %>% left_join(gannot %>% select(-t1_or_dmri), by = "IDP") 
+  
+## PC's should have region==PC
+ind = substr(allxcan_annot$IDP, 1, 2) == "PC"
+allxcan_annot$region[ind] = allxcan$IDP[ind]
+## set subtype of PCs as subtype
+ind = substr(allxcan_annot$IDP, 1, 2) == "PC"
+allxcan_annot$subtype[ind] = allxcan$IDP[ind]
+
+## limit to IDP main results: T1 and TBSS-based dMRI
+xcandf = allxcan_annot %>% filter(subtype %in% names(color_map)) %>% rename(side = left_or_right)
+```
+
+
+# BrainXcan results 
+
+In this analysis, we tested `r nrow(allxcan)` structural and diffusion MRI-derived phenotypes with cross validated spearman correlation >= `r signif(min(allxcan$CV_Spearman), digits = 3)`.
+
+<!--- 
+```{r, bonforroni_cutoffs}
+## define number of total tests per phenotype to be used for bonferroni correction
+n_pred_idps = length(unique(xcandf$IDP))
+p_thres = 0.05 / n_pred_idps
+z_thres = abs(qnorm(p_thres / 2))
+``` 
+-->
+
+```{r, qvalue}
+## define number of total tests per phenotype 
+## calculate qvalue
+n_pred_idps = length(unique(xcandf$IDP))
+xcandf$qvalue = get_qvalue(xcandf[[bxcan_pval_col]])
+# if(any(xcandf$qvalue < qval_cutoff)) {
+#   p_thres = max(xcandf[[bxcan_pval_col]][xcandf$qvalue < qval_cutoff])
+#   z_thres = abs(qnorm(p_thres / 2))
+# } else {
+#   p_thres = 0
+#   z_thres = NULL
+# }
+
+``` 
+
+
+```{r, fdr}
+xcandf$fdr = get_fdr(xcandf[[bxcan_pval_col]])
+if(any(xcandf$fdr < fdr_cutoff)) {
+  p_thres = max(xcandf[[bxcan_pval_col]][xcandf$fdr < fdr_cutoff])
+  z_thres = abs(qnorm(p_thres / 2))
+} else {
+  p_thres = 0
+  z_thres = NULL
+}
+
+``` 
+
+For the main analysis we focused on `r n_pred_idps` IDPs, which include `r sum(xcandf$subtype == 'Gray-Cortical')` cortical volumes, `r sum(xcandf$subtype == 'Subcortical')` sub-cortical volumes, `r sum(xcandf$subtype == 'Gray-Subcortical')` sub-cortical gray matter volumes.
+In below, we show the overall number of IDP by IDP subtype in the main results.
+
+```{r, show_count}
+xcandf %>% count(subtype) %>% pander::pander()
+```
+
+The p-value being used is `r message(pval_col_to_name[[bxcan_pval_col]])`.
+
+Among `r n_pred_idps` IDPs (`r sum(xcandf$modality=="T1")` T1 and `r sum(xcandf$modality=="dMRI")` diffusion MRI, including the subtype-specific PCs), `r sum(xcandf$fdr < fdr_cutoff)` were significantly associated with `r phenotype_name` (FDR < $`r fdr_cutoff`$). 
+
+ 
+```{r, vis_t1, fig.height=7, fig.width=8}
+idp_type = 'T1'
+pp = plot_bxcan_ordered(xcandf %>% filter(modality == idp_type), color_map, z_thres)
+pp + ggtitle(paste0(phenotype_name, ' - ', idp_type))
+# ggsave(paste0(out_prefix, '.brainxcan_zscore.', idp_type, '.png'), pp, height = 6, width = 8)
+```
+
+```{r, vis_dmri, fig.height=6, fig.width=8}
+idp_type = 'dMRI'
+pp = plot_bxcan_ordered(xcandf %>% filter(modality == idp_type), color_map, z_thres)
+pp + ggtitle(paste0(phenotype_name, ' - ', idp_type))
+# ggsave(paste0(out_prefix, '.brainxcan_zscore.', idp_type, '.png'), pp, height = 6, width = 8)
+``` 
+
+
+<!--- 
+```{r, vis_t12, fig.height=14, fig.width=6}
+idp_type = 'T1'
+pp = plot_bxcan_ordered_heatmap(xcandf %>% filter(modality == idp_type), color_map, z_thres)
+pp + ggtitle(paste0(phenotype_name, ' - ', idp_type)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+# ggsave(glue::glue('{outdir}/{phenotype_name}.{idp_type}.png'), width = 6, height = 14)
+```
+
+```{r, vis_dmri2, fig.height=12, fig.width=6}
+idp_type = 'dMRI'
+pp = plot_bxcan_ordered_heatmap(xcandf %>% filter(modality == idp_type), color_map, z_thres)
+pp + ggtitle(paste0(phenotype_name, ' - ', idp_type))
+# ggsave(glue::glue('{outdir}/{phenotype_name}.{idp_type}.png'), width = 6, height = 12)
+```
+-->
+
+
+```{r load_mr}
+df_mr = load_mr_sum_stats(paste0(input_prefix, '_files/MR_results/'))
+if(!is.null(df_mr)) {
+  df_mr$mr_pval = gen_mr_sign(df_mr$b, df_mr$pval)
+  tmp = df_mr %>% filter(method == 'ACAT meta-analysis') %>% reshape2::dcast(IDP ~ direction, value.var = 'pval')
+  xcandf_w_mr = xcandf %>% left_join(tmp, by = 'IDP') 
+  xcandf_w_mr = xcandf_w_mr %>% mutate(link = paste0('[MR plot](#', tolower(IDP), ')'))
+  xcandf_w_mr$link[ is.na(xcandf_w_mr$`Phenotype -> IDP`) ] = NA
+}
+```
+
+The top `r ntop` associations for dMRI are 
+```{r dmri_top_n, results='asis'}
+if(!is.null(df_mr)) {
+  xcandf_w_mr %>% select(IDP, modality, subtype, region, side, zscore, fdr, `IDP -> Phenotype`, `Phenotype -> IDP`, link) %>% filter(fdr < fdr_cutoff) %>% filter(modality == "dMRI") %>% arrange(fdr) %>% select(-modality) %>% head(ntop) %>% pander
+} else {
+  cat('not shown since no significant IDP being identified (pass p-value cutoff).\n\n')
+}
+```
+
+The top `r ntop` associations for T1 are 
+```{r t1_top_n, results='asis'}
+if(!is.null(df_mr)) {
+  xcandf_w_mr %>% select(IDP, modality, subtype, region, side, zscore, fdr, `IDP -> Phenotype`, `Phenotype -> IDP`, link) %>% filter(fdr < fdr_cutoff) %>% filter(modality == "T1") %>% arrange(fdr) %>% select(-modality) %>% head(ntop) %>% pander
+} else {
+  cat('not shown since no significant IDP being identified (pass p-value cutoff).\n\n')
+}
+```
+
+# Visualization of associations in the brain
+
+```{r bxcan_figures, results='asis'}
+idp_types = c('T1', 'dMRI')
+for(i in idp_types) {
+  cat('\n\n')
+  cat(paste0('## ', i, '\n\n'))
+  fn = paste0(input_prefix, '.vis.', i, '.pdf')
+  fn_png = paste0(tempdir(), stringr::str_replace(basename(fn), '\\.pdf', '\\.png'))
+  pdftools::pdf_convert(fn, filenames = fn_png, verbose = F, dpi = 300)
+  cat(paste0('![](', fn_png, ')'))
+  # system(paste0('rm ', fn_png))
+}
+```
+
+# BrainXcan MR Figures
+
+```{r mr_figures, results='asis'}
+if(!is.null(df_mr)) {
+  mr_idps = df_mr %>% select(IDP) %>% distinct()
+  for(i in mr_idps$IDP) {
+    if(i %in% xcandf$IDP) {
+      # do next chunks
+    } else {
+      next
+    }
+    fig_fn = Sys.glob(paste0(input_prefix, '_files/MR_results/', '*', i, '.MR_vis.pdf'))
+    if(length(fig_fn) > 1) {
+      next
+    }
+    info = allxcan_annot %>% filter(IDP == i)
+    msg = i
+    if(nrow(info) == 1) {
+      msg = info$notes
+    }
+    cat('\n\n')
+    cat(paste0('## ', i, ' {#', tolower(i), '}', '\n\n'))
+    cat(msg, '\n\n')
+    fn_png = paste0(tempdir(), stringr::str_replace(basename(fig_fn), '\\.pdf', '\\.png'))
+    pdftools::pdf_convert(fig_fn, filenames = fn_png, verbose = F, dpi = 200)
+    cat(paste0('![](', fn_png, ')'))
+    # system(paste0('rm ', fn_png))
+  }
+} else {
+  cat('No significant IDP being identified.\n\n')
+}
+```
