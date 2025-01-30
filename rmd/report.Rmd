@@ -6,7 +6,7 @@ title: "BrainXcan automated reports"
 
 The followings are the outputs of the example shown in "[Get started with an example](example.html)".
 
-* [The example automated report with Schizophrenia GWAS](../external_resources/example_run/brainxcan_test/SCZ_PGC_2020.report.html)
+* [The example automated report with Schizophrenia GWAS](../external_resources/example_run/brainxcan_test/SCZ.report.html)
 * [Download the entire output of the example BrainXcan call](../external_resources/example_run/brainxcan_test.zip)
 
 
